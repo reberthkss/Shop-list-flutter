@@ -44,7 +44,8 @@ class ProductDetailRouteList {
 @singleton
 class ListRoute {
   late final String base = "/market_list";
-  late final String add = "add";
+  late final String addSingle = "add/single";
+  late final String addBulk = "add/:marketListId/bulk";
   late final String create = "create";
   late final String delete = "delete";
   late final String detail = "detail/:marketListId";
@@ -54,10 +55,11 @@ class ListRoute {
 
   String getDetail(String id) =>
       "$base/${detail.replaceAll(":marketListId", id)}";
+
   String getAdd([
-    String? productSku = null,
+    String? productSku,
   ]) {
-    String route = "$base/$add";
+    String route = "$base/$addSingle";
 
     if (productSku != null) {
       route = "$route?productSku=$productSku";
@@ -65,6 +67,8 @@ class ListRoute {
     return route;
   }
 
+  String getBulk(String marketListId) =>
+      "$base/${addBulk.replaceAll(":marketListId", marketListId)}";
   String getDelete() => "$base/$delete";
   String getFilter() => "$base/$filter";
   String getSearch() => "$base/$search";

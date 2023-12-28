@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ProductsWidgetResult extends StatelessWidget {
-  const ProductsWidgetResult();
+  const ProductsWidgetResult({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.shrink();
+    return const SizedBox.shrink();
   }
 }

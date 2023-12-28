@@ -1,9 +1,8 @@
 import 'package:app/di/injection.dart';
-import 'package:app/home/department/department_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import '../bloc/products_bloc.dart';
+import '../../../../route/route_list.dart';
 import '../../widgets/products_by_department_widget.dart';
 
 class ProductsPage extends StatelessWidget {
@@ -13,12 +12,16 @@ class ProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productsBloc = getIt.get<ProductsBloc>();
-    final departmentBloc = getIt.get<DepartmentBloc>();
+    final routeList = getIt.get<RouteList>();
 
-    return BlocProvider(
-      create: (_) => departmentBloc,
-      child: ProductsByDepartmentWidget(),
+    return ProductsByDepartmentWidget(
+      onTapProduct: (productId) {
+        context.go(
+          routeList.productDetail.getDetail(
+            productId,
+          ),
+        );
+      },
     );
   }
 }

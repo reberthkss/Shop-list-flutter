@@ -1,4 +1,3 @@
-import 'package:app/home/base/model/market_list_model.dart';
 import 'package:app/home/list/widget/market_list_view/market_list_view_widget.dart';
 import 'package:app/route/route_list.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../di/injection.dart';
 import '../create/market_list_home_create_bloc.dart';
-import '../widget/list_card/list_card.widget.dart';
 
 class MarketListHome extends StatelessWidget {
   MarketListHome({
@@ -30,7 +28,7 @@ class MarketListHome extends StatelessWidget {
           switch (state.runtimeType) {
             case Loading:
               {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
@@ -46,20 +44,20 @@ class MarketListHome extends StatelessWidget {
                     ],
                   ),
                   floatingActionButton: FloatingActionButton.extended(
-                    label: Text("Nova lista"),
-                    icon: Icon(
+                    label: const Text("Nova lista"),
+                    icon: const Icon(
                       Icons.add,
                     ),
                     onPressed: () {
                       showDialog(
                         context: context,
                         builder: (ctx) => AlertDialog(
-                          title: Text(
+                          title: const Text(
                             "Nova lista",
                           ),
                           content: TextField(
                             controller: controller,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               label: Text("Qual o nome da sua lista? :)"),
                             ),
@@ -69,7 +67,7 @@ class MarketListHome extends StatelessWidget {
                               onPressed: () {
                                 context.pop();
                               },
-                              child: Text(
+                              child: const Text(
                                 "Cancelar",
                                 textAlign: TextAlign.center,
                               ),
@@ -83,7 +81,7 @@ class MarketListHome extends StatelessWidget {
                                 );
                                 context.pop();
                               },
-                              child: Text(
+                              child: const Text(
                                 "Confirmar",
                                 textAlign: TextAlign.center,
                               ),

@@ -1,9 +1,10 @@
-import 'package:app/home/list/add/market_list_add_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../di/injection.dart';
+import '../../../../di/injection.dart';
 import 'market_list_add_bloc.dart';
+import 'market_list_add_widget.dart';
 
 class MarketListAddPage extends StatelessWidget {
   MarketListAddPage({
@@ -16,11 +17,8 @@ class MarketListAddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<MarketListAddBloc>(
-      create: (_) => _marketListAddBloc..add(
-        LoadMarketList(
-          productSku: productSku
-        )
-      ),
+      create: (_) =>
+          _marketListAddBloc..add(LoadMarketList(productSku: productSku)),
       child: BlocBuilder<MarketListAddBloc, MarketListAddState>(
         builder: (context, state) {
           switch (state.runtimeType) {
@@ -36,7 +34,24 @@ class MarketListAddPage extends StatelessWidget {
                 return MarketListAddWidget(
                   product: state.product,
                   marketList: state.marketList,
+                  onAdd: (marketListId) {
+                    if (productSku != null) {
+                      _marketListAddBloc.add(
+                        AddProductToMarketList(
+                          marketListId: marketListId,
+                          productId: productSku!,
+                        ),
+                      );
+                    } else {
+                      // caso productsku nao seja nulo navega para uma tela onde o usuario vai selecionar um produto ou mais para add na lista
+                    }
+                  },
                 );
+              }
+            case SuccessOnAdd:
+              {
+                context.pop();
+                return const SizedBox.shrink();
               }
             default:
               {

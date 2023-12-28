@@ -18,7 +18,7 @@ class MarketListHorizontalItemWidget extends StatelessWidget {
         onTap(marketListModel.id);
       },
       child: Card(
-        child: Container(
+        child: SizedBox(
           height: 50,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../../home/base/model/product_model.dart';
 
@@ -7,6 +6,7 @@ class ProductCard extends StatelessWidget {
   const ProductCard({
     required this.product,
     required this.onTap,
+    super.key,
   });
 
   final Product product;
@@ -30,7 +30,7 @@ class ProductCard extends StatelessWidget {
                     width: 100,
                   ),
                   Container(
-                    decoration: BoxDecoration(color: Colors.green),
+                    decoration: const BoxDecoration(color: Colors.green),
                     child: Text(product.price),
                   )
                 ],

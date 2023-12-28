@@ -14,7 +14,7 @@ class MarketListCreateServiceImpl extends MarketListCreateService {
   @override
   Future<void> create(String name) async {
     final response = await dio.post(
-      "/market_list",
+      "/market-list",
       data: {"name": name},
     );
 

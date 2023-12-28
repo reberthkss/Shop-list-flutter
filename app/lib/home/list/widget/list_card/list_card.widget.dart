@@ -15,7 +15,7 @@ class ListCardWidget extends StatelessWidget {
         onTap(model.id);
       },
       child: Card(
-        child: Container(
+        child: SizedBox(
           height: 50,
           child: Column(
             children: [Text(model.name)],

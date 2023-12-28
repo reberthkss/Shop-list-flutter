@@ -17,7 +17,7 @@ class CheckTokenWidget extends StatelessWidget {
       builder: (context, state) {
         return Center(
           child: GestureDetector(
-            child: Text("GO TO HOME"),
+            child: const Text("GO TO HOME"),
             onTap: () {
               context.go(getIt.get<RouteList>().homeList.homeDashboard);
             },

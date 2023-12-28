@@ -14,6 +14,7 @@ class ProductsByDepartmentWidget extends StatelessWidget {
     DepartmentSelectorBloc? departmentSelectorBloc,
     DepartmentBloc? departmentBloc,
     ProductsBloc? productsBloc,
+    required this.onTapProduct,
     super.key,
   })  : _departmentSelectorBloc = departmentSelectorBloc ?? getIt.get(),
         _departmentBloc = departmentBloc ?? getIt.get(),
@@ -23,6 +24,7 @@ class ProductsByDepartmentWidget extends StatelessWidget {
   final DepartmentBloc _departmentBloc;
   final ProductsBloc _productsBloc;
   final TextEditingController _searchController = TextEditingController();
+  final Function(String productId) onTapProduct;
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +47,11 @@ class ProductsByDepartmentWidget extends StatelessWidget {
               children: [
                 DepartmentDropdownWidget(
                   onRequestDepartmentProduct: (departmentId) {
-                    context.read<DepartmentSelectorBloc>().add(
-                          SetDepartmentSelected(
-                            selectedDepartmentId: departmentId.toString(),
-                          ),
-                        );
+                    _departmentSelectorBloc.add(
+                      SetDepartmentSelected(
+                        selectedDepartmentId: departmentId.toString(),
+                      ),
+                    );
                   },
                 ),
                 BlocBuilder<ProductsBloc, ProductsState>(builder: (ctx, state) {
@@ -85,6 +87,7 @@ class ProductsByDepartmentWidget extends StatelessWidget {
                   child: ProductsRenderer(
                     state: departmentSelectorState,
                     productsBloc: _productsBloc,
+                    onTapProduct: onTapProduct,
                   ),
                 ),
               ],
@@ -100,11 +103,13 @@ class ProductsRenderer extends StatelessWidget {
   const ProductsRenderer({
     required this.state,
     required this.productsBloc,
+    required this.onTapProduct,
     super.key,
   });
 
   final DepartmentSelectorBlocState state;
   final ProductsBloc productsBloc;
+  final Function(String productId) onTapProduct;
 
   @override
   Widget build(BuildContext context) {
@@ -118,6 +123,7 @@ class ProductsRenderer extends StatelessWidget {
             ),
           ),
         selectedDepartmentId: departmentId,
+        onTapProduct: onTapProduct,
       );
     }
     return const SizedBox.shrink();

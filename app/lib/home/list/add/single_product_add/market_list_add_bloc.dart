@@ -1,16 +1,15 @@
-import 'package:app/home/list/add/market_list_add_model.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../base/model/market_list_model.dart';
-import '../../base/model/product_model.dart';
+import '../../../base/model/market_list_model.dart';
+import '../../../base/model/product_model.dart';
 import 'market_list_add_interactor.dart';
 
 @injectable
-class MarketListAddBloc extends Bloc<Event, MarketListAddState> {
+class MarketListAddBloc extends Bloc<MarketListAddEvent, MarketListAddState> {
   MarketListAddBloc(this.interactor) : super(Idle()) {
     on<LoadMarketList>(loadMarketList);
+    on<AddProductToMarketList>(addProductToMarketList);
   }
 
   final MarketListInteractor interactor;
@@ -34,9 +33,22 @@ class MarketListAddBloc extends Bloc<Event, MarketListAddState> {
       print(exception);
     }
   }
+
+  void addProductToMarketList(
+    AddProductToMarketList event,
+    Emitter<MarketListAddState> emit,
+  ) async {
+    try {
+      emit(Loading());
+      await interactor.saveProduct(event);
+      emit(SuccessOnAdd());
+    } catch (exception) {
+      print(exception);
+    }
+  }
 }
 
-abstract class Event {}
+abstract class MarketListAddEvent {}
 
 abstract class MarketListAddState {}
 
@@ -48,7 +60,7 @@ class Loading extends MarketListAddState {
   Loading();
 }
 
-class LoadMarketList extends Event {
+class LoadMarketList extends MarketListAddEvent {
   LoadMarketList({
     required this.productSku,
   });
@@ -63,4 +75,18 @@ class ShowMarketList extends MarketListAddState {
 
   final Product? product;
   final List<MarketListModel> marketList;
+}
+
+class AddProductToMarketList extends MarketListAddEvent {
+  AddProductToMarketList({
+    required this.productId,
+    required this.marketListId,
+  });
+
+  final String productId;
+  final String marketListId;
+}
+
+class SuccessOnAdd extends MarketListAddState {
+  SuccessOnAdd();
 }

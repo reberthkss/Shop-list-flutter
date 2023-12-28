@@ -16,7 +16,7 @@ class MarketListViewServiceImpl extends MarketListViewService {
 
   @override
   Future<List<MarketListModel>> loadList() async {
-    final response = await dio.get("/market_list");
+    final response = await dio.get("/market-list");
 
     if (response.statusCode == 200) {
       final List<dynamic> data = jsonDecode(response.data) ?? [];

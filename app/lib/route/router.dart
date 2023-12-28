@@ -1,4 +1,4 @@
-import 'package:app/home/list/add/market_list_add_page.dart';
+import 'package:app/home/list/add/bulk_product_add/market_list_bulk_add_page.dart';
 import 'package:app/home/list/create/market_list_create_page.dart';
 import 'package:app/home/list/home/market_list_home.dart';
 import 'package:app/home/products/detail/page/product_detail_page.dart';
@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import '../authentication/checkLogin/page/check_token_page.dart';
 import '../di/injection.dart';
 import '../home/dashboard/page/dashboard_page.dart';
+import '../home/list/add/single_product_add/market_list_add_page.dart';
 import '../home/list/detail/market_list_detail_page.dart';
 import '../home/nested_navigator.dart';
 import '../home/products/list/page/products_page.dart';
@@ -85,13 +86,20 @@ GoRouter router() {
                 },
                 routes: [
                   GoRoute(
-                    path: routeList.listRoute.add,
+                    path: routeList.listRoute.addSingle,
                     parentNavigatorKey: _rootNavigatorKey,
                     builder: (context, state) {
                       final sku = state.uri.queryParameters['productSku'];
                       return MarketListAddPage(
                         productSku: sku,
                       );
+                    },
+                  ),
+                  GoRoute(
+                    path: routeList.listRoute.addBulk,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    builder: (context, state) {
+                      return MarketListBulkAddPage();
                     },
                   ),
                   GoRoute(
@@ -120,7 +128,7 @@ GoRouter router() {
               GoRoute(
                 path: routeList.homeList.homeSettings,
                 builder: (context, state) {
-                  return SettingsPage();
+                  return const SettingsPage();
                 },
               )
             ],

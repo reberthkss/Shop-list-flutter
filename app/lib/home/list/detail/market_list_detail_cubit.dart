@@ -3,12 +3,18 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import 'market_list_detail_interactor.dart';
+
 @injectable
 class MarketListDetailCubit
     extends Bloc<MarketListDetailEvent, MarketListDetailState> {
-  MarketListDetailCubit() : super(Idle()) {
+  MarketListDetailCubit(
+    this.interactor,
+  ) : super(Idle()) {
     on<RequestScreen>(onRequestScreen);
   }
+
+  final MarketListDetailInteractor interactor;
 
   void onRequestScreen(
       RequestScreen event, Emitter<MarketListDetailState> emit) async {
@@ -17,18 +23,16 @@ class MarketListDetailCubit
     emit(
       Loading(),
     );
-
-    await Future.delayed(Duration(seconds: 2));
-
-    emit(
-      ScreenResult(
-        model: MarketListDetailModel(
-          name: 'Lista 2',
-          id: marketListId,
-          historicalPrice: [],
+    try {
+      final marketDetail = await interactor.getMarketListDetail(marketListId);
+      emit(
+        ScreenResult(
+          model: marketDetail,
         ),
-      ),
-    );
+      );
+    } catch (exception) {
+      print(exception);
+    }
   }
 }
 

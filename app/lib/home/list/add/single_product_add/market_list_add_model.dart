@@ -1,5 +1,5 @@
-import '../../base/model/market_list_model.dart';
-import '../../base/model/product_model.dart';
+import '../../../base/model/market_list_model.dart';
+import '../../../base/model/product_model.dart';
 
 class MarketListAddModel {
   const MarketListAddModel({

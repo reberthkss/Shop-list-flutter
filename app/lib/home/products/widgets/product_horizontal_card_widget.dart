@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import '../../base/model/product_model.dart';
 
 class ProductHorizontalCard extends StatelessWidget {
-  const ProductHorizontalCard({required this.product});
+  const ProductHorizontalCard({
+    required this.product,
+    super.key,
+  });
 
   final Product product;
 
@@ -25,6 +28,7 @@ class ProductHorizontalCard extends StatelessWidget {
               ],
             ),
           ),
+          Text(product.price)
         ],
       ),
     );

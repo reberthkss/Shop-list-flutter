@@ -20,49 +20,49 @@ class ProductDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        context.pop();
-        return false;
-      },
-      child: Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back
+        onWillPop: () async {
+          context.pop();
+          return false;
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                context.pop();
+              },
+            ),
           ),
-          onPressed: () {
-            context.pop();
-          },
-        ),
-      ),
-      body: BlocProvider<ProductDetailBloc>(
-        create: (_) => _bloc..add(RequestProductDetail(productId: productId)),
-        child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
-            builder: (context, state) {
-          switch (state.runtimeType) {
-            case LoadingProductDetail:
-              {
-                return const Center(
-                  child: SizedBox(
-                    height: 50,
-                    width: 50,
-                    child: CircularProgressIndicator(),
-                  ),
-                );
+          body: BlocProvider<ProductDetailBloc>(
+            create: (_) =>
+                _bloc..add(RequestProductDetail(productId: productId)),
+            child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+                builder: (context, state) {
+              switch (state.runtimeType) {
+                case LoadingProductDetail:
+                  {
+                    return const Center(
+                      child: SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+                case ShowProductDetail:
+                  {
+                    state as ShowProductDetail;
+                    return ProductDetailWidget(
+                        productDetail: state.productDetail);
+                  }
+                case Idle:
+                  {
+                    return const CircularProgressIndicator();
+                  }
               }
-            case ShowProductDetail:
-              {
-                state as ShowProductDetail;
-                return ProductDetailWidget(productDetail: state.productDetail);
-              }
-            case Idle:
-              {
-                return CircularProgressIndicator();
-              }
-          }
-          return const SizedBox.shrink();
-        }),
-      ),
-    ));
+              return const SizedBox.shrink();
+            }),
+          ),
+        ));
   }
 }

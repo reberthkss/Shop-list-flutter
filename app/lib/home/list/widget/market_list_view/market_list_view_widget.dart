@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../di/injection.dart';
 import '../../../../route/route_list.dart';
-import '../../../base/model/market_list_model.dart';
 import '../list_card/list_card.widget.dart';
 import 'market_list_view_bloc.dart';
 
@@ -38,7 +37,7 @@ class MarketListViewWidget extends StatelessWidget {
                 return SingleChildScrollView(
                   child: Column(
                     children: [
-                      Text("Suas listas de mercado"),
+                     const Text("Suas listas de mercado"),
                       SizedBox(
                         child: ListView.builder(
                           itemCount: state.list.length,

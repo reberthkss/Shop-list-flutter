@@ -49,7 +49,7 @@ class ProductDetailWidget extends StatelessWidget {
                 Center(
                   child: Text(productDetail.info.name),
                 ),
-                Text("Historico de preço"),
+                const Text("Historico de preço"),
                 Center(
                   child: HighCharts(
                     loader: const SizedBox(
@@ -69,15 +69,15 @@ class ProductDetailWidget extends StatelessWidget {
             ),
           ),
         ),
-        Container(
+        SizedBox(
           width: double.infinity,
           child: ElevatedButton(
-            style: ButtonStyle(),
+            style: const ButtonStyle(),
             onPressed: () {
               context
                   .go("/market_list/add?productSku=${productDetail.info.id}");
             },
-            child: Text("Adicionar"),
+            child: const Text("Adicionar"),
           ),
         )
       ],

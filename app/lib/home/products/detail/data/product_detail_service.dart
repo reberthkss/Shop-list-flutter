@@ -17,12 +17,10 @@ class ProductDetailServiceImpl implements ProductDetailService {
   final Dio dio;
   @override
   Future<ProductDetail> getProductDetail(String sku) async {
-    final response = await dio.get(
-      "/product/$sku/detail"
-    );
+    final response = await dio.get("/product/$sku/detail");
     dynamic data;
     if (response.statusCode == 200) {
-      data = jsonDecode(response.data) ?? null;
+      data = jsonDecode(response.data);
     }
 
     if (data != null) {
