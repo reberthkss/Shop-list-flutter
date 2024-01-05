@@ -1,4 +1,5 @@
 import 'package:app/di/injection.dart';
+import 'package:app/widgets/button/button_extended.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:high_chart/high_chart.dart';
@@ -69,17 +70,12 @@ class ProductDetailWidget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            style: const ButtonStyle(),
-            onPressed: () {
-              context
-                  .go("/market_list/add?productSku=${productDetail.info.id}");
-            },
-            child: const Text("Adicionar"),
-          ),
-        )
+        ButtonExtended(
+          onPressed: () {
+            context.go("/market_list/add?productSku=${productDetail.info.id}");
+          },
+          text: "Adicionar",
+        ),
       ],
     );
   }

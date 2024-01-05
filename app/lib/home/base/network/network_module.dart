@@ -12,4 +12,4 @@ abstract class NetworkModule {
 }
 
 
-const String BASE_URL = "http://192.168.15.67:3000";
+const String BASE_URL = "http://192.168.0.9:3000";

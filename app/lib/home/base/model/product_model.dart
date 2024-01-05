@@ -6,12 +6,14 @@ class Product extends Equatable {
     required this.id,
     required this.imageUrl,
     required this.price,
+    required this.departmentId,
   });
 
   final String name;
   final String id;
   final String imageUrl;
   final String price;
+  final String departmentId;
 
   factory Product.fromJson(Map<dynamic, dynamic>? json) {
     if (json == null) {
@@ -22,6 +24,7 @@ class Product extends Equatable {
       id: json['id'] ?? '',
       imageUrl: json['thumb'] ?? '',
       price: json['price'] ?? '',
+      departmentId: json['departmentId'] ?? '',
     );
   }
 
@@ -31,6 +34,7 @@ class Product extends Equatable {
       id: '',
       imageUrl: '',
       price: '',
+      departmentId: '',
     );
   }
 

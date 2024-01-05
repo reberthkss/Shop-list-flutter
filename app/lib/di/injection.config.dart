@@ -15,42 +15,43 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import '../authentication/checkLogin/bloc/check_login_bloc.dart' as _i4;
 import '../authentication/login/data/login_repository.dart' as _i8;
-import '../home/base/network/network_module.dart' as _i38;
+import '../home/base/network/network_module.dart' as _i39;
 import '../home/dashboard/bloc/dashboard_bloc.dart' as _i5;
-import '../home/department/department_bloc.dart' as _i37;
-import '../home/department/department_interactor.dart' as _i32;
-import '../home/department/department_repository.dart' as _i24;
+import '../home/department/department_bloc.dart' as _i38;
+import '../home/department/department_interactor.dart' as _i33;
+import '../home/department/department_repository.dart' as _i25;
 import '../home/department/department_service.dart' as _i16;
-import '../home/list/add/single_product_add/market_list_add_bloc.dart' as _i25;
+import '../home/list/add/bulk_product_add/bulk_add_cubit.dart' as _i24;
+import '../home/list/add/single_product_add/market_list_add_bloc.dart' as _i26;
 import '../home/list/add/single_product_add/market_list_add_interactor.dart'
     as _i20;
 import '../home/list/add/single_product_add/market_list_add_repository.dart'
     as _i17;
 import '../home/list/add/single_product_add/market_list_add_service.dart'
     as _i9;
-import '../home/list/create/market_list_create_interactor.dart' as _i26;
+import '../home/list/create/market_list_create_interactor.dart' as _i27;
 import '../home/list/create/market_list_create_repository.dart' as _i18;
 import '../home/list/create/market_list_create_service.dart' as _i10;
-import '../home/list/create/market_list_home_create_bloc.dart' as _i28;
-import '../home/list/detail/market_list_detail_cubit.dart' as _i33;
-import '../home/list/detail/market_list_detail_interactor.dart' as _i27;
+import '../home/list/create/market_list_home_create_bloc.dart' as _i29;
+import '../home/list/detail/market_list_detail_cubit.dart' as _i34;
+import '../home/list/detail/market_list_detail_interactor.dart' as _i28;
 import '../home/list/detail/market_list_detail_repository.dart' as _i19;
 import '../home/list/detail/market_list_detail_service.dart' as _i11;
 import '../home/list/widget/market_list_view/market_list_view_bloc.dart'
-    as _i34;
+    as _i35;
 import '../home/list/widget/market_list_view/market_list_view_interactor.dart'
-    as _i29;
+    as _i30;
 import '../home/list/widget/market_list_view/market_list_view_repository.dart'
     as _i21;
 import '../home/list/widget/market_list_view/market_list_view_service.dart'
     as _i12;
-import '../home/products/detail/bloc/product_detail_bloc.dart' as _i35;
+import '../home/products/detail/bloc/product_detail_bloc.dart' as _i36;
 import '../home/products/detail/data/product_detail_repository.dart' as _i22;
 import '../home/products/detail/data/product_detail_service.dart' as _i13;
-import '../home/products/detail/domain/product_detail_interactor.dart' as _i30;
-import '../home/products/list/bloc/products_bloc.dart' as _i36;
+import '../home/products/detail/domain/product_detail_interactor.dart' as _i31;
+import '../home/products/list/bloc/products_bloc.dart' as _i37;
 import '../home/products/list/bloc/products_by_department_bloc.dart' as _i6;
-import '../home/products/list/products_interactor.dart' as _i31;
+import '../home/products/list/products_interactor.dart' as _i32;
 import '../home/products/list/products_repository.dart' as _i23;
 import '../home/products/list/products_service.dart' as _i14;
 import '../home/settings/bloc/settings_bloc.dart' as _i15;
@@ -114,38 +115,40 @@ extension GetItInjectableX on _i1.GetIt {
         _i22.ProductDetailRepositoryImpl(gh<_i13.ProductDetailService>()));
     gh.factory<_i23.ProductsRepository>(
         () => _i23.ProductsRepositoryImpl(gh<_i14.ProductsService>()));
-    gh.factory<_i24.DepartmentRepository>(
-        () => _i24.DepartmentRepositoryImpl(gh<_i16.DepartmentService>()));
-    gh.factory<_i25.MarketListAddBloc>(
-        () => _i25.MarketListAddBloc(gh<_i20.MarketListInteractor>()));
-    gh.factory<_i26.MarketListCreateInteractor>(() =>
-        _i26.MarketListCreateInteractorImpl(
+    gh.factory<_i24.BulkAddCubit>(
+        () => _i24.BulkAddCubit(gh<_i20.MarketListInteractor>()));
+    gh.factory<_i25.DepartmentRepository>(
+        () => _i25.DepartmentRepositoryImpl(gh<_i16.DepartmentService>()));
+    gh.factory<_i26.MarketListAddBloc>(
+        () => _i26.MarketListAddBloc(gh<_i20.MarketListInteractor>()));
+    gh.factory<_i27.MarketListCreateInteractor>(() =>
+        _i27.MarketListCreateInteractorImpl(
             gh<_i18.MarketListCreateRepository>()));
-    gh.factory<_i27.MarketListDetailInteractor>(() =>
-        _i27.MarketListDetailInteractorImpl(
+    gh.factory<_i28.MarketListDetailInteractor>(() =>
+        _i28.MarketListDetailInteractorImpl(
             gh<_i19.MarketListDetailRepository>()));
-    gh.factory<_i28.MarketListHomeCreateBloc>(() =>
-        _i28.MarketListHomeCreateBloc(gh<_i26.MarketListCreateInteractor>()));
-    gh.factory<_i29.MarketListViewInteractor>(() =>
-        _i29.MarketListViewInteractorImpl(gh<_i21.MarketListViewRepository>()));
-    gh.factory<_i30.ProductDetailInteractor>(() =>
-        _i30.ProductDetailInteractorImpl(gh<_i22.ProductDetailRepository>()));
-    gh.factory<_i31.ProductsInteractor>(
-        () => _i31.ProductsInteractorImpl(gh<_i23.ProductsRepository>()));
-    gh.factory<_i32.DepartmentInteractor>(
-        () => _i32.DepartmentInteractorImpl(gh<_i24.DepartmentRepository>()));
-    gh.factory<_i33.MarketListDetailCubit>(() =>
-        _i33.MarketListDetailCubit(gh<_i27.MarketListDetailInteractor>()));
-    gh.factory<_i34.MarketListViewBloc>(
-        () => _i34.MarketListViewBloc(gh<_i29.MarketListViewInteractor>()));
-    gh.factory<_i35.ProductDetailBloc>(
-        () => _i35.ProductDetailBloc(gh<_i30.ProductDetailInteractor>()));
-    gh.factory<_i36.ProductsBloc>(
-        () => _i36.ProductsBloc(gh<_i31.ProductsInteractor>()));
-    gh.factory<_i37.DepartmentBloc>(
-        () => _i37.DepartmentBloc(gh<_i32.DepartmentInteractor>()));
+    gh.factory<_i29.MarketListHomeCreateBloc>(() =>
+        _i29.MarketListHomeCreateBloc(gh<_i27.MarketListCreateInteractor>()));
+    gh.factory<_i30.MarketListViewInteractor>(() =>
+        _i30.MarketListViewInteractorImpl(gh<_i21.MarketListViewRepository>()));
+    gh.factory<_i31.ProductDetailInteractor>(() =>
+        _i31.ProductDetailInteractorImpl(gh<_i22.ProductDetailRepository>()));
+    gh.factory<_i32.ProductsInteractor>(
+        () => _i32.ProductsInteractorImpl(gh<_i23.ProductsRepository>()));
+    gh.factory<_i33.DepartmentInteractor>(
+        () => _i33.DepartmentInteractorImpl(gh<_i25.DepartmentRepository>()));
+    gh.factory<_i34.MarketListDetailCubit>(() =>
+        _i34.MarketListDetailCubit(gh<_i28.MarketListDetailInteractor>()));
+    gh.factory<_i35.MarketListViewBloc>(
+        () => _i35.MarketListViewBloc(gh<_i30.MarketListViewInteractor>()));
+    gh.factory<_i36.ProductDetailBloc>(
+        () => _i36.ProductDetailBloc(gh<_i31.ProductDetailInteractor>()));
+    gh.factory<_i37.ProductsBloc>(
+        () => _i37.ProductsBloc(gh<_i32.ProductsInteractor>()));
+    gh.factory<_i38.DepartmentBloc>(
+        () => _i38.DepartmentBloc(gh<_i33.DepartmentInteractor>()));
     return this;
   }
 }
 
-class _$NetworkModule extends _i38.NetworkModule {}
+class _$NetworkModule extends _i39.NetworkModule {}

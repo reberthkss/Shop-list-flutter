@@ -5,6 +5,8 @@ import 'package:app/widgets/product_card/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../base/model/product_model.dart';
+
 class ProductsListWidget extends StatelessWidget {
   ProductsListWidget({
     routeList,
@@ -18,7 +20,7 @@ class ProductsListWidget extends StatelessWidget {
   final ProductsBloc _bloc;
   final controller = TrackingScrollController();
   final String selectedDepartmentId;
-  final Function(String productId) onTapProduct;
+  final Function(Product product) onTapProduct;
 
   void handlePagination(ProductsBloc bloc) {
     if (controller.position.maxScrollExtent == controller.offset) {
@@ -65,7 +67,7 @@ class ProductsListWidget extends StatelessWidget {
                         return ProductCard(
                             product: product,
                             onTap: () {
-                              onTapProduct(product.id);
+                              onTapProduct(product);
                             });
                       },
                       childCount: state.productList.length,

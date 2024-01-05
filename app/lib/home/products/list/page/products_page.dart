@@ -15,10 +15,10 @@ class ProductsPage extends StatelessWidget {
     final routeList = getIt.get<RouteList>();
 
     return ProductsByDepartmentWidget(
-      onTapProduct: (productId) {
+      onTapProduct: (product) {
         context.go(
           routeList.productDetail.getDetail(
-            productId,
+            product.id,
           ),
         );
       },

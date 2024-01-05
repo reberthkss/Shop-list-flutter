@@ -99,7 +99,11 @@ GoRouter router() {
                     path: routeList.listRoute.addBulk,
                     parentNavigatorKey: _rootNavigatorKey,
                     builder: (context, state) {
-                      return MarketListBulkAddPage();
+                      final marketListId =
+                          state.pathParameters['marketListId'] ?? '';
+                      return MarketListBulkAddPage(
+                        marketListId: marketListId,
+                      );
                     },
                   ),
                   GoRoute(

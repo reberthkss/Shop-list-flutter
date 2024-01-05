@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../di/injection.dart';
+import '../../base/model/product_model.dart';
 import '../../department/department_bloc.dart';
 import '../list/bloc/products_bloc.dart';
 
@@ -24,7 +25,7 @@ class ProductsByDepartmentWidget extends StatelessWidget {
   final DepartmentBloc _departmentBloc;
   final ProductsBloc _productsBloc;
   final TextEditingController _searchController = TextEditingController();
-  final Function(String productId) onTapProduct;
+  final Function(Product product) onTapProduct;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +110,7 @@ class ProductsRenderer extends StatelessWidget {
 
   final DepartmentSelectorBlocState state;
   final ProductsBloc productsBloc;
-  final Function(String productId) onTapProduct;
+  final Function(Product product) onTapProduct;
 
   @override
   Widget build(BuildContext context) {
