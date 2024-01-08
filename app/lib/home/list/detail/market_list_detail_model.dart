@@ -51,6 +51,22 @@ class MarketListDetailModel extends MarketListModel {
     );
   }
 
+  MarketListDetailModel copyWith({
+    String? name,
+    String? id,
+    List<Price>? historicalPrice,
+    List<Product>? products,
+    String? total,
+  }) {
+    return MarketListDetailModel(
+      name: name ?? this.name,
+      id: id ?? this.id,
+      historicalPrice: historicalPrice ?? this.historicalPrice,
+      products: products ?? this.products,
+      total: total ?? this.total,
+    );
+  }
+
   @override
   List<Object> get props => [
         historicalPrice,

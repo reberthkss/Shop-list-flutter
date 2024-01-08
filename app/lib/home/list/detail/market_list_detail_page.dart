@@ -1,11 +1,13 @@
 import 'package:app/route/route_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../di/injection.dart';
 import '../../products/widgets/product_horizontal_card_widget.dart';
 import 'market_list_detail_cubit.dart';
+import 'market_list_detail_result_widget.dart';
 
 class MarketListDetailPage extends StatelessWidget {
   MarketListDetailPage({
@@ -31,65 +33,65 @@ class MarketListDetailPage extends StatelessWidget {
         ),
       child: BlocBuilder<MarketListDetailCubit, MarketListDetailState>(
         builder: (context, state) {
-          switch (state.runtimeType) {
-            case Loading:
+          switch (state.status) {
+            case MarketListDetailStatus.LOADING:
+            case MarketListDetailStatus.REMOVING:
               {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
-            case ScreenResult:
+            case MarketListDetailStatus.RESULT:
+            case MarketListDetailStatus.REMOVING_SUCCESS:
+            case MarketListDetailStatus.REMOVING_ERROR:
               {
-                state as ScreenResult;
-                return Scaffold(
-                  appBar: AppBar(
-                    title: Text(state.model.name),
-                  ),
-                  floatingActionButton: FloatingActionButton.extended(
-                    onPressed: () {
-                      context.go(_routeList.listRoute.getBulk(marketListId));
-                    },
-                    label: const Text(
-                      "Adicionar produto",
-                    ),
-                  ),
-                  body: Column(
-                    children: [
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: state.model.products.length,
-                          itemBuilder: (ctx, index) {
-                            final product = state.model.products[index];
-                            return Container(
-                              padding: const EdgeInsets.all(16),
-                              child: ProductHorizontalCard(
-                                product: product,
-                              ),
-                            );
-                          },
+                if (state.model == null) {
+                  return const SizedBox.shrink();
+                }
+
+                WidgetsBinding.instance.addPostFrameCallback(
+                  (timeStamp) {
+                    if (state.status ==
+                        MarketListDetailStatus.REMOVING_SUCCESS) {
+                      Fluttertoast.showToast(
+                        msg: "Os produtos foram removidos da lista!",
+                      );
+                      _marketListDetailCubit.add(
+                        RequestScreen(
+                          marketListId: marketListId,
                         ),
+                      );
+                    }
+
+                    if (state.status == MarketListDetailStatus.REMOVING_ERROR) {
+                      Fluttertoast.showToast(
+                        msg:
+                            "Houve um erro durante a remoção dos produtos! Tente novamente",
+                      );
+                    }
+                  },
+                );
+
+                return MarketListDetailResultWidget(
+                  model: state.model!,
+                  marketListId: marketListId,
+                  onDelete: (product) {
+                    _marketListDetailCubit.add(
+                      RemoveProduct(product: product),
+                    );
+                  },
+                  onConfirm: () {
+                    _marketListDetailCubit.add(
+                      ConfirmDeletion(
+                        marketListId: marketListId,
                       ),
-                      Container(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text("TOTAL"),
-                            ),
-                            Expanded(
-                              child: Text(
-                                state.model.total,
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                    );
+                  },
                 );
               }
             default:
               {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
           }
         },

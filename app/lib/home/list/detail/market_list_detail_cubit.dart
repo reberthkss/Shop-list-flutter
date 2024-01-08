@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../base/model/product_model.dart';
 import 'market_list_detail_interactor.dart';
 
 @injectable
@@ -10,8 +11,15 @@ class MarketListDetailCubit
     extends Bloc<MarketListDetailEvent, MarketListDetailState> {
   MarketListDetailCubit(
     this.interactor,
-  ) : super(Idle()) {
+  ) : super(
+          const MarketListDetailState(
+            status: MarketListDetailStatus.IDLE,
+            model: null,
+          ),
+        ) {
     on<RequestScreen>(onRequestScreen);
+    on<RemoveProduct>(onRemoveProduct);
+    on<ConfirmDeletion>(onConfirmDeletion);
   }
 
   final MarketListDetailInteractor interactor;
@@ -21,17 +29,69 @@ class MarketListDetailCubit
     final marketListId = event.marketListId;
 
     emit(
-      Loading(),
+      state.copyWith(
+        status: MarketListDetailStatus.LOADING,
+      ),
     );
     try {
       final marketDetail = await interactor.getMarketListDetail(marketListId);
       emit(
-        ScreenResult(
+        state.copyWith(
+          status: MarketListDetailStatus.RESULT,
           model: marketDetail,
         ),
       );
     } catch (exception) {
       print(exception);
+    }
+  }
+
+  void onRemoveProduct(
+      RemoveProduct event, Emitter<MarketListDetailState> emit) {
+    try {
+      emit(
+        state.copyWith(
+            model: state.model?.copyWith(
+              products: state.model?.products
+                  .where((product) => product.id != event.product.id)
+                  .toList(),
+            ),
+            removedProducts: [...state.removedProducts, event.product]),
+      );
+    } catch (exception) {
+      print(exception);
+    }
+  }
+
+  void onConfirmDeletion(
+    ConfirmDeletion event,
+    Emitter<MarketListDetailState> emit,
+  ) async {
+    try {
+      emit(
+        state.copyWith(
+          status: MarketListDetailStatus.REMOVING
+        )
+      );
+      
+      await interactor.removeProducts(
+        state.removedProducts,
+        event.marketListId,
+      );
+
+      emit(
+        state.copyWith(
+          status: MarketListDetailStatus.REMOVING_SUCCESS
+        )
+      );
+      
+    } catch (exception) {
+      print(exception);
+      emit(
+        state.copyWith(
+          status: MarketListDetailStatus.REMOVING_ERROR
+        )
+      );
     }
   }
 }
@@ -49,29 +109,59 @@ class RequestScreen extends MarketListDetailEvent {
       ];
 }
 
-abstract class MarketListDetailState extends Equatable {}
-
-class Idle extends MarketListDetailState {
-  Idle();
-
-  @override
-  List<Object> get props => [];
-}
-
-class Loading extends MarketListDetailState {
-  Loading();
-
-  @override
-  List<Object> get props => [];
-}
-
-class ScreenResult extends MarketListDetailState {
-  ScreenResult({required this.model});
-
-  final MarketListDetailModel model;
+class RemoveProduct extends MarketListDetailEvent {
+  RemoveProduct({required this.product});
+  final Product product;
 
   @override
   List<Object> get props => [
+        product,
+      ];
+}
+
+class ConfirmDeletion extends MarketListDetailEvent {
+  ConfirmDeletion({
+    required this.marketListId,
+  });
+  final String marketListId;
+  @override
+  List<Object> get props => [];
+}
+
+class MarketListDetailState extends Equatable {
+  const MarketListDetailState(
+      {required this.status,
+      required this.model,
+      this.removedProducts = const []});
+  final MarketListDetailStatus status;
+  final MarketListDetailModel? model;
+  final List<Product> removedProducts;
+
+  MarketListDetailState copyWith({
+    MarketListDetailStatus? status,
+    MarketListDetailModel? model,
+    List<Product>? removedProducts,
+  }) {
+    return MarketListDetailState(
+      model: model ?? this.model,
+      status: status ?? this.status,
+      removedProducts: removedProducts ?? this.removedProducts,
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+        status,
         model,
       ];
+}
+
+enum MarketListDetailStatus {
+  LOADING,
+  RESULT,
+  IDLE,
+  ERROR,
+  REMOVING,
+  REMOVING_SUCCESS,
+  REMOVING_ERROR
 }
