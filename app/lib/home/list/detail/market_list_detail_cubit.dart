@@ -47,16 +47,17 @@ class MarketListDetailCubit
   }
 
   void onRemoveProduct(
-      RemoveProduct event, Emitter<MarketListDetailState> emit) {
+    RemoveProduct event,
+    Emitter<MarketListDetailState> emit,
+  ) {
     try {
       emit(
         state.copyWith(
-            model: state.model?.copyWith(
-              products: state.model?.products
-                  .where((product) => product.id != event.product.id)
-                  .toList(),
-            ),
-            removedProducts: [...state.removedProducts, event.product]),
+          removedProducts: [
+            ...state.removedProducts,
+            event.product,
+          ],
+        ),
       );
     } catch (exception) {
       print(exception);
@@ -68,30 +69,17 @@ class MarketListDetailCubit
     Emitter<MarketListDetailState> emit,
   ) async {
     try {
-      emit(
-        state.copyWith(
-          status: MarketListDetailStatus.REMOVING
-        )
-      );
-      
+      emit(state.copyWith(status: MarketListDetailStatus.REMOVING));
+
       await interactor.removeProducts(
         state.removedProducts,
         event.marketListId,
       );
 
-      emit(
-        state.copyWith(
-          status: MarketListDetailStatus.REMOVING_SUCCESS
-        )
-      );
-      
+      emit(state.copyWith(status: MarketListDetailStatus.REMOVING_SUCCESS));
     } catch (exception) {
       print(exception);
-      emit(
-        state.copyWith(
-          status: MarketListDetailStatus.REMOVING_ERROR
-        )
-      );
+      emit(state.copyWith(status: MarketListDetailStatus.REMOVING_ERROR));
     }
   }
 }

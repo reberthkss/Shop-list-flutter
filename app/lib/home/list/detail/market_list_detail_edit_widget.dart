@@ -11,6 +11,7 @@ import 'market_list_detail_model.dart';
 class MarketListDetailEditWidget extends StatelessWidget {
   MarketListDetailEditWidget({
     required this.model,
+    required this.removedList,
     required this.marketListId,
     required this.onDelete,
     RouteList? routeList,
@@ -18,6 +19,7 @@ class MarketListDetailEditWidget extends StatelessWidget {
   }) : _routeList = routeList ?? getIt.get();
 
   final MarketListDetailModel model;
+  final List<Product> removedList;
   final RouteList _routeList;
   final String marketListId;
   final Function(Product product) onDelete;
@@ -31,6 +33,23 @@ class MarketListDetailEditWidget extends StatelessWidget {
             itemCount: model.products.length,
             itemBuilder: (ctx, index) {
               final product = model.products[index];
+              Function()? onPressedDelete;
+              bool isRemoved = false;
+
+              try {
+                removedList.firstWhere(
+                  (removedProduct) => removedProduct.id == product.id,
+                );
+                isRemoved = true;
+              } catch (_) {
+                // do nothing
+              }
+
+              if (!isRemoved) {
+                onPressedDelete = () {
+                  onDelete(product);
+                };
+              }
               return Container(
                 padding: const EdgeInsets.all(16),
                 child: Row(
@@ -38,12 +57,13 @@ class MarketListDetailEditWidget extends StatelessWidget {
                     Expanded(
                       child: ProductHorizontalCard(
                         product: product,
+                        style: isRemoved
+                            ? ProductHorizontalCardStyle.REMOVED
+                            : ProductHorizontalCardStyle.NORMAL,
                       ),
                     ),
                     IconButton(
-                      onPressed: () {
-                        onDelete(product);
-                      },
+                      onPressed: onPressedDelete,
                       icon: const Icon(
                         Icons.close,
                       ),

@@ -31,7 +31,26 @@ class MarketListDetailPage extends StatelessWidget {
             marketListId: marketListId,
           ),
         ),
-      child: BlocBuilder<MarketListDetailCubit, MarketListDetailState>(
+      child: BlocConsumer<MarketListDetailCubit, MarketListDetailState>(
+        listener: (context, state) {
+          if (state.status == MarketListDetailStatus.REMOVING_SUCCESS) {
+            Fluttertoast.showToast(
+              msg: "Os produtos foram removidos da lista!",
+            );
+            _marketListDetailCubit.add(
+              RequestScreen(
+                marketListId: marketListId,
+              ),
+            );
+          }
+
+          if (state.status == MarketListDetailStatus.REMOVING_ERROR) {
+            Fluttertoast.showToast(
+              msg:
+                  "Houve um erro durante a remoção dos produtos! Tente novamente",
+            );
+          }
+        },
         builder: (context, state) {
           switch (state.status) {
             case MarketListDetailStatus.LOADING:
@@ -49,31 +68,9 @@ class MarketListDetailPage extends StatelessWidget {
                   return const SizedBox.shrink();
                 }
 
-                WidgetsBinding.instance.addPostFrameCallback(
-                  (timeStamp) {
-                    if (state.status ==
-                        MarketListDetailStatus.REMOVING_SUCCESS) {
-                      Fluttertoast.showToast(
-                        msg: "Os produtos foram removidos da lista!",
-                      );
-                      _marketListDetailCubit.add(
-                        RequestScreen(
-                          marketListId: marketListId,
-                        ),
-                      );
-                    }
-
-                    if (state.status == MarketListDetailStatus.REMOVING_ERROR) {
-                      Fluttertoast.showToast(
-                        msg:
-                            "Houve um erro durante a remoção dos produtos! Tente novamente",
-                      );
-                    }
-                  },
-                );
-
                 return MarketListDetailResultWidget(
                   model: state.model!,
+                  removedList: state.removedProducts,
                   marketListId: marketListId,
                   onDelete: (product) {
                     _marketListDetailCubit.add(
