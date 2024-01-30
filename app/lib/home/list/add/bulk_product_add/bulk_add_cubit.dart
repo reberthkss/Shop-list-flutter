@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,6 +15,7 @@ class BulkAddCubit extends Bloc<BulkAddEvent, BulkAddState> {
         ) {
     on<Add>(onAdd);
     on<Confirm>(onConfirm);
+    on<Remove>(onRemoveProduct);
   }
   final MarketListInteractor interactor;
 
@@ -40,11 +42,30 @@ class BulkAddCubit extends Bloc<BulkAddEvent, BulkAddState> {
       },
     );
   }
+
+  void onRemoveProduct(Remove event, Emitter<BulkAddState> emit) {
+    final indexOfProduct = state.selectedProductList.indexWhere(
+      (product) => product.id == event.product.id,
+    );
+
+    if (indexOfProduct == -1) {
+      return;
+    }
+
+    emit(
+      state.copyWith(
+        productList: [
+          ...state.selectedProductList.sublist(0, indexOfProduct),
+          ...state.selectedProductList.sublist(indexOfProduct + 1)
+        ],
+      ),
+    );
+  }
 }
 
 abstract class BulkAddEvent {}
 
-class BulkAddState {
+class BulkAddState extends Equatable {
   final List<Product> selectedProductList;
 
   const BulkAddState({
@@ -53,8 +74,14 @@ class BulkAddState {
 
   BulkAddState copyWith({List<Product>? productList}) {
     return BulkAddState(
-        selectedProductList: productList ?? selectedProductList);
+      selectedProductList: productList ?? selectedProductList,
+    );
   }
+
+  @override
+  List<Object> get props => [
+        selectedProductList,
+      ];
 }
 
 class Add extends BulkAddEvent {
@@ -71,4 +98,11 @@ class Confirm extends BulkAddEvent {
   });
 
   final String marketListId;
+}
+
+class Remove extends BulkAddEvent {
+  Remove({
+    required this.product,
+  });
+  final Product product;
 }

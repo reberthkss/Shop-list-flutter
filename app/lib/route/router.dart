@@ -41,7 +41,7 @@ GoRouter router() {
           navigationShell: navigationShell,
         ),
         branches: [
-          StatefulShellBranch(
+          /*StatefulShellBranch(
             navigatorKey: _homeListNavigator,
             routes: [
               GoRoute(
@@ -51,7 +51,7 @@ GoRouter router() {
                 },
               )
             ],
-          ),
+          ),*/
           StatefulShellBranch(
             navigatorKey: _productsNavigatorKey,
             routes: [
@@ -126,7 +126,7 @@ GoRouter router() {
               ),
             ],
           ),
-          StatefulShellBranch(
+          /*StatefulShellBranch(
             navigatorKey: _settingsNavigatorKey,
             routes: [
               GoRoute(
@@ -136,7 +136,7 @@ GoRouter router() {
                 },
               )
             ],
-          ),
+          ),*/
         ],
       ),
     ],

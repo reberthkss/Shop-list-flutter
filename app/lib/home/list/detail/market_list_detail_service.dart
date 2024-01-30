@@ -23,28 +23,21 @@ class MarketListDetailServiceImpl extends MarketListDetailService {
   @override
   Future<MarketListDetailModel> getMarketListDetail(String id) async {
     final response = await dio.get("/market-list/$id/detail");
-    if (response.statusCode == 200) {
-      final json = jsonDecode(response.data);
-      return MarketListDetailModel.fromJson(json);
-    }
-    throw Exception("Status code => ${response.statusCode}");
+    final json = jsonDecode(response.data);
+    return MarketListDetailModel.fromJson(json);
   }
 
   @override
   Future<void> removeProducts(
-      List<Product> productsToRemove, String marketListId) async {
-    final response = await dio.post(
-      "/market-list/$marketListId/products/remove",
-      data: {
-        "products": productsToRemove.map((product) => product.id).toList()
-      }
-    );
-
-    if (response.statusCode == 200) {
-      return;
-    }
-    throw Exception(
-      "Não foi possível realizar a deleção dos produtos da lista de produtos. Status => ${response.statusCode}",
-    );
+    List<Product> productsToRemove,
+    String marketListId,
+  ) async {
+    await dio.post("/market-list/$marketListId/products/remove", data: {
+      "products": productsToRemove
+          .map(
+            (product) => product.id,
+          )
+          .toList()
+    });
   }
 }

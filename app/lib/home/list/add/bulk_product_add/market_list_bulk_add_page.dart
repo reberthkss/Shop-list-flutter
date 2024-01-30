@@ -16,10 +16,8 @@ class MarketListBulkAddPage extends StatelessWidget {
     BulkAddCubit? cubit,
     required this.marketListId,
     super.key,
-  })  : _routeList = routeList ?? getIt.get(),
-        _cubit = cubit ?? getIt.get();
+  }) : _cubit = cubit ?? getIt.get();
 
-  final RouteList _routeList;
   final _controller = DraggableScrollableController();
   final BulkAddCubit _cubit;
   final String marketListId;
@@ -78,8 +76,26 @@ class MarketListBulkAddPage extends StatelessWidget {
                             itemBuilder: (ctx, index) {
                               final Product product =
                                   state.selectedProductList[index];
-                              return ProductHorizontalCard(
-                                product: product,
+                              return Row(
+                                children: [
+                                  Expanded(
+                                    child: ProductHorizontalCard(
+                                      product: product,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      context.read<BulkAddCubit>().add(
+                                            Remove(
+                                              product: product,
+                                            ),
+                                          );
+                                    },
+                                    icon: Icon(
+                                      Icons.close,
+                                    ),
+                                  )
+                                ],
                               );
                             },
                           ),
@@ -100,8 +116,8 @@ class MarketListBulkAddPage extends StatelessWidget {
               child: ButtonExtended(
                 onPressed: () {
                   _cubit.add(
-                    Confirm(marketListId: marketListId),
-                  );
+                        Confirm(marketListId: marketListId),
+                      );
                   context.pop();
                 },
                 text: "Confirmar",

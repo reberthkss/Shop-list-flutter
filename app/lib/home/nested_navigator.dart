@@ -21,10 +21,10 @@ class NestedNavigation extends StatelessWidget {
       bottomNavigationBar: NavigationBar(
         selectedIndex: navigationShell.currentIndex,
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: "Inicio"),
+          // NavigationDestination(icon: Icon(Icons.home), label: "Inicio"),
           NavigationDestination(icon: Icon(Icons.sell), label: "Produtos"),
           NavigationDestination(icon: Icon(Icons.view_list), label: "Listas"),
-          NavigationDestination(icon: Icon(Icons.menu), label: "Mais"),
+          // NavigationDestination(icon: Icon(Icons.menu), label: "Mais"),
         ],
         onDestinationSelected: _onTap,
       ),

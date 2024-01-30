@@ -26,29 +26,42 @@ class MarketListDetailViewWidget extends StatelessWidget {
           child: ListView.builder(
             itemCount: model.products.length,
             itemBuilder: (ctx, index) {
-              final product = model.products[index];
-              return Container(
-                padding: const EdgeInsets.all(16),
-                child: ProductHorizontalCard(
-                  product: product,
+              final productOccurence = model.products[index];
+              return InkWell(
+                child: Row(
+                  children: [
+                    Text(
+                      productOccurence.occurences.toString(),
+                    ),
+                    Expanded(
+                      child: ProductHorizontalCard(
+                        product: productOccurence.product,
+                      ),
+                    )
+                  ],
                 ),
+                onTap: () {
+                  context.push(
+                    _routeList.productDetail.getDetail(
+                      productOccurence.product.id,
+                    ),
+                  );
+                },
               );
             },
           ),
         ),
-        Container(
-          child: Row(
-            children: [
-              const Expanded(
-                child: Text("TOTAL"),
+        Row(
+          children: [
+            Text(
+              "TOTAL: ",
+            ),
+            Expanded(
+              child: Text(
+                model.total,
               ),
-              Expanded(
-                child: Text(
-                  model.total,
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         )
       ],
     );

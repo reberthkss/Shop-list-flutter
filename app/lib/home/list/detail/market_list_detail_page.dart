@@ -2,10 +2,8 @@ import 'package:app/route/route_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../di/injection.dart';
-import '../../products/widgets/product_horizontal_card_widget.dart';
 import 'market_list_detail_cubit.dart';
 import 'market_list_detail_result_widget.dart';
 
@@ -15,12 +13,10 @@ class MarketListDetailPage extends StatelessWidget {
     RouteList? routeList,
     MarketListDetailCubit? marketListDetailCubit,
     super.key,
-  })  : _marketListDetailCubit = marketListDetailCubit ?? getIt.get(),
-        _routeList = routeList ?? getIt.get();
+  }) : _marketListDetailCubit = marketListDetailCubit ?? getIt.get();
 
   final MarketListDetailCubit _marketListDetailCubit;
   final String marketListId;
-  final RouteList _routeList;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +33,11 @@ class MarketListDetailPage extends StatelessWidget {
             Fluttertoast.showToast(
               msg: "Os produtos foram removidos da lista!",
             );
-            _marketListDetailCubit.add(
-              RequestScreen(
-                marketListId: marketListId,
-              ),
-            );
+            context.read<MarketListDetailCubit>().add(
+                  RequestScreen(
+                    marketListId: marketListId,
+                  ),
+                );
           }
 
           if (state.status == MarketListDetailStatus.REMOVING_ERROR) {
@@ -71,18 +67,26 @@ class MarketListDetailPage extends StatelessWidget {
                 return MarketListDetailResultWidget(
                   model: state.model!,
                   removedList: state.removedProducts,
+                  checkedList: state.checkedProducts,
                   marketListId: marketListId,
                   onDelete: (product) {
-                    _marketListDetailCubit.add(
-                      RemoveProduct(product: product),
-                    );
+                    context.read<MarketListDetailCubit>().add(
+                          RemoveProduct(product: product),
+                        );
                   },
                   onConfirm: () {
-                    _marketListDetailCubit.add(
-                      ConfirmDeletion(
-                        marketListId: marketListId,
-                      ),
-                    );
+                    context.read<MarketListDetailCubit>().add(
+                          ConfirmDeletion(
+                            marketListId: marketListId,
+                          ),
+                        );
+                  },
+                  onCheck: (product) {
+                    context.read<MarketListDetailCubit>().add(
+                          Check(
+                            product: product,
+                          ),
+                        );
                   },
                 );
               }

@@ -19,7 +19,7 @@ class DepartmentBloc extends Bloc<DepartmentBlocEvent, DepartmentBlocState> {
 
   void loadDepartments(
     LoadDepartments event,
-    Emitter<DepartmentBlocState> emitter,
+    Emitter<DepartmentBlocState> emit,
   ) async {
     try {
       emit(

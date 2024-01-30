@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../di/injection.dart';
 import '../../../route/route_list.dart';
 import '../../base/model/product_model.dart';
+import 'market_list_detail_check_list_widget.dart';
 import 'market_list_detail_edit_widget.dart';
 
 enum WidgetState { NORMAL, EDITING, CHECKING }
@@ -14,17 +15,21 @@ class MarketListDetailResultWidget extends StatefulWidget {
   MarketListDetailResultWidget({
     required this.model,
     required this.removedList,
+    required this.checkedList,
     required this.marketListId,
     required this.onDelete,
     required this.onConfirm,
+    required this.onCheck,
     RouteList? routeList,
     super.key,
   }) : _routeList = routeList ?? getIt.get();
   final MarketListDetailModel model;
   final List<Product> removedList;
+  final List<Product> checkedList;
   final RouteList _routeList;
   final String marketListId;
   final Function(Product product) onDelete;
+  final Function(Product product) onCheck;
   final Function() onConfirm;
 
   @override
@@ -107,19 +112,26 @@ class MarketListDetailResultState extends State<MarketListDetailResultWidget> {
         onEditing: SizedBox.shrink(),
         onChecking: SizedBox.shrink(),
       ),
-      body: Renderer(
-        state: state,
-        onNormal: MarketListDetailViewWidget(
-          model: widget.model,
-          marketListId: widget.marketListId,
+      body: Container(
+        padding: const EdgeInsets.all(16),
+        child: Renderer(
+          state: state,
+          onNormal: MarketListDetailViewWidget(
+            model: widget.model,
+            marketListId: widget.marketListId,
+          ),
+          onEditing: MarketListDetailEditWidget(
+            model: widget.model,
+            removedList: widget.removedList,
+            marketListId: widget.marketListId,
+            onDelete: widget.onDelete,
+          ),
+          onChecking: MarketListDetailCheckListWidget(
+            productList: widget.model.products,
+            checkedProducts: widget.checkedList,
+            onCheck: widget.onCheck,
+          ),
         ),
-        onEditing: MarketListDetailEditWidget(
-          model: widget.model,
-          removedList: widget.removedList,
-          marketListId: widget.marketListId,
-          onDelete: widget.onDelete,
-        ),
-        onChecking: SizedBox.shrink(),
       ),
     );
   }

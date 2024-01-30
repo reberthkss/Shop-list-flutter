@@ -6,6 +6,7 @@ class MarketListHorizontalItemWidget extends StatelessWidget {
   const MarketListHorizontalItemWidget({
     required this.marketListModel,
     required this.onTap,
+    super.key,
   });
 
   final MarketListModel marketListModel;

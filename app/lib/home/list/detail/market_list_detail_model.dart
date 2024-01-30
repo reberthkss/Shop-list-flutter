@@ -1,5 +1,6 @@
 import 'package:app/home/base/model/market_list_model.dart';
 import 'package:app/home/base/model/price_model.dart';
+import 'package:app/home/base/model/product_occurrences_model.dart';
 
 import '../../base/model/product_model.dart';
 
@@ -13,7 +14,7 @@ class MarketListDetailModel extends MarketListModel {
   });
 
   final List<Price> historicalPrice;
-  final List<Product> products;
+  final List<ProductOccurrencesModel> products;
   final String total;
 
   factory MarketListDetailModel.fromJson(Map<String, dynamic>? json) {
@@ -42,8 +43,8 @@ class MarketListDetailModel extends MarketListModel {
           .toList(),
       products: productList
           .map(
-            (price) => Product.fromJson(
-              price,
+            (product) => ProductOccurrencesModel.fromJson(
+              product,
             ),
           )
           .toList(),
@@ -55,7 +56,7 @@ class MarketListDetailModel extends MarketListModel {
     String? name,
     String? id,
     List<Price>? historicalPrice,
-    List<Product>? products,
+    List<ProductOccurrencesModel>? products,
     String? total,
   }) {
     return MarketListDetailModel(
