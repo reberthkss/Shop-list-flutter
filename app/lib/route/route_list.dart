@@ -19,10 +19,12 @@ class RouteList {
 @singleton
 class AuthenticationRouteList {
   final String login = "/login";
-  final String loginOtp = "/login/otp";
-  final String register = "/register";
-  final String registerOtp = "/register/otp";
-  final String checkToken = "/checkToken";
+  final String loginOtp = "login/otp";
+  final String register = "register";
+  final String registerOtp = "register/otp";
+  final String checkToken = "checkToken";
+
+  String goToSignInOtp() => "/login/$loginOtp";
 }
 
 @singleton

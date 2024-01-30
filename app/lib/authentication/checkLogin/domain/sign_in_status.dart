@@ -1,0 +1,3 @@
+enum SignInStatus {
+  IDLE, SIGNING
+}

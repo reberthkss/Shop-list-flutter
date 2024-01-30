@@ -1,3 +1,4 @@
+import 'package:app/authentication/checkLogin/page/sign_in_page.dart';
 import 'package:app/home/list/add/bulk_product_add/market_list_bulk_add_page.dart';
 import 'package:app/home/list/create/market_list_create_page.dart';
 import 'package:app/home/list/home/market_list_home.dart';
@@ -25,16 +26,21 @@ GoRouter router() {
 
   return GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: routeList.home,
+    initialLocation: routeList.authenticationList.login,
     routes: [
       GoRoute(
-        path: routeList.home,
-        builder: (context, state) => const CheckTokenPage(),
-      ),
-      GoRoute(
-        path: routeList.authenticationList.checkToken,
-        builder: (BuildContext context, GoRouterState state) =>
-            const CheckTokenPage(),
+        path: routeList.authenticationList.login,
+        builder: (context, state) => SignInPage(
+          bloc: getIt.get(),
+        ),
+        routes: [
+          GoRoute(
+            path: routeList.authenticationList.loginOtp,
+            builder: (context, state) {
+              return Text("Hello from token otp");
+            },
+          )
+        ],
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) => NestedNavigation(
