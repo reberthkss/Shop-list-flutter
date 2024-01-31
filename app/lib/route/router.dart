@@ -1,4 +1,4 @@
-import 'package:app/authentication/checkLogin/page/sign_in_page.dart';
+import 'package:app/authentication/login/presentation/sign_in_page.dart';
 import 'package:app/home/list/add/bulk_product_add/market_list_bulk_add_page.dart';
 import 'package:app/home/list/create/market_list_create_page.dart';
 import 'package:app/home/list/home/market_list_home.dart';
@@ -9,12 +9,10 @@ import 'package:go_router/go_router.dart';
 
 import '../authentication/checkLogin/page/check_token_page.dart';
 import '../di/injection.dart';
-import '../home/dashboard/page/dashboard_page.dart';
 import '../home/list/add/single_product_add/market_list_add_page.dart';
 import '../home/list/detail/market_list_detail_page.dart';
 import '../home/nested_navigator.dart';
 import '../home/products/list/page/products_page.dart';
-import '../home/settings/page/settings_page.dart';
 
 GoRouter router() {
   final RouteList routeList = getIt.get<RouteList>();
@@ -37,7 +35,7 @@ GoRouter router() {
           GoRoute(
             path: routeList.authenticationList.loginOtp,
             builder: (context, state) {
-              return Text("Hello from token otp");
+              return CheckTokenPage();
             },
           )
         ],

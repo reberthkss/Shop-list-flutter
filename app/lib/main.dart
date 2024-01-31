@@ -16,12 +16,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Shop List',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return SafeArea(
+      child: MaterialApp.router(
+        title: 'Shop List',
+        theme: ThemeData(
+          useMaterial3: true,
+        ),
+        routerConfig: goRouter,
       ),
-      routerConfig: goRouter,
     );
   }
 }

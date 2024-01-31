@@ -12,7 +12,7 @@ class CheckTokenPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => getIt.get<CheckLoginBloc>(),
-      child: const CheckTokenWidget(),
+      child: CheckTokenWidget(),
     );
   }
 }
