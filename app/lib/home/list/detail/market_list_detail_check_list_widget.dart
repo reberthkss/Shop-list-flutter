@@ -40,8 +40,8 @@ class MarketListDetailCheckListWidget extends StatelessWidget {
                   child: ProductHorizontalCard(
                     product: productOccurence.product,
                     style: isChecked
-                        ? ProductHorizontalCardStyle.CHECKING
-                        : ProductHorizontalCardStyle.NORMAL,
+                        ? ProductHorizontalCardStyle.checking
+                        : ProductHorizontalCardStyle.normal,
                   ),
                 ),
               )

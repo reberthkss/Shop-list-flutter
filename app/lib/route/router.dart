@@ -16,14 +16,12 @@ import '../home/products/list/page/products_page.dart';
 
 GoRouter router() {
   final RouteList routeList = getIt.get<RouteList>();
-  final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  final _homeListNavigator = GlobalKey<NavigatorState>();
-  final _productsNavigatorKey = GlobalKey<NavigatorState>();
-  final _shoppingListNavigatorKey = GlobalKey<NavigatorState>();
-  final _settingsNavigatorKey = GlobalKey<NavigatorState>();
+  final rootNavigatorKey = GlobalKey<NavigatorState>();
+  final productsNavigatorKey = GlobalKey<NavigatorState>();
+  final shoppingListNavigatorKey = GlobalKey<NavigatorState>();
 
   return GoRouter(
-    navigatorKey: _rootNavigatorKey,
+    navigatorKey: rootNavigatorKey,
     initialLocation: routeList.authenticationList.login,
     routes: [
       GoRoute(
@@ -35,7 +33,10 @@ GoRouter router() {
           GoRoute(
             path: routeList.authenticationList.loginOtp,
             builder: (context, state) {
-              return CheckTokenPage();
+              final username = state.extra as String ?? '';
+              return CheckTokenPage(
+                username: username,
+              );
             },
           )
         ],
@@ -57,7 +58,7 @@ GoRouter router() {
             ],
           ),*/
           StatefulShellBranch(
-            navigatorKey: _productsNavigatorKey,
+            navigatorKey: productsNavigatorKey,
             routes: [
               GoRoute(
                   path: routeList.productDetail.base,
@@ -67,7 +68,7 @@ GoRouter router() {
                   routes: [
                     GoRoute(
                       path: routeList.productDetail.detail,
-                      parentNavigatorKey: _rootNavigatorKey,
+                      parentNavigatorKey: rootNavigatorKey,
                       builder: (context, state) {
                         final String productId =
                             state.pathParameters['productId'] ?? '';
@@ -81,7 +82,7 @@ GoRouter router() {
             ],
           ),
           StatefulShellBranch(
-            navigatorKey: _shoppingListNavigatorKey,
+            navigatorKey: shoppingListNavigatorKey,
             routes: [
               GoRoute(
                 path: routeList.listRoute.base,
@@ -91,7 +92,7 @@ GoRouter router() {
                 routes: [
                   GoRoute(
                     path: routeList.listRoute.addSingle,
-                    parentNavigatorKey: _rootNavigatorKey,
+                    parentNavigatorKey: rootNavigatorKey,
                     builder: (context, state) {
                       final sku = state.uri.queryParameters['productSku'];
                       return MarketListAddPage(
@@ -101,7 +102,7 @@ GoRouter router() {
                   ),
                   GoRoute(
                     path: routeList.listRoute.addBulk,
-                    parentNavigatorKey: _rootNavigatorKey,
+                    parentNavigatorKey: rootNavigatorKey,
                     builder: (context, state) {
                       final marketListId =
                           state.pathParameters['marketListId'] ?? '';
@@ -112,7 +113,7 @@ GoRouter router() {
                   ),
                   GoRoute(
                     path: routeList.listRoute.detail,
-                    parentNavigatorKey: _rootNavigatorKey,
+                    parentNavigatorKey: rootNavigatorKey,
                     builder: (context, state) {
                       final String marketListId =
                           state.pathParameters['marketListId'] ?? '';
@@ -121,9 +122,9 @@ GoRouter router() {
                   ),
                   GoRoute(
                     path: routeList.listRoute.create,
-                    parentNavigatorKey: _rootNavigatorKey,
+                    parentNavigatorKey: rootNavigatorKey,
                     builder: (context, state) {
-                      return MarketListCreatePage();
+                      return const MarketListCreatePage();
                     },
                   ),
                 ],

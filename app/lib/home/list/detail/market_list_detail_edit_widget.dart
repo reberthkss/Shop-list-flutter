@@ -50,8 +50,8 @@ class MarketListDetailEditWidget extends StatelessWidget {
                     child: ProductHorizontalCard(
                       product: productOccurence.product,
                       style: isRemoved
-                          ? ProductHorizontalCardStyle.REMOVED
-                          : ProductHorizontalCardStyle.NORMAL,
+                          ? ProductHorizontalCardStyle.removed
+                          : ProductHorizontalCardStyle.normal,
                     ),
                   ),
                   IconButton(

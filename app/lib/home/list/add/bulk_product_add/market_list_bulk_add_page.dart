@@ -52,7 +52,7 @@ class MarketListBulkAddPage extends StatelessWidget {
               minChildSize: 0.15,
               expand: true,
               snap: true,
-              snapSizes: [0.5],
+              snapSizes: const [0.5],
               builder:
                   (BuildContext context, ScrollController scrollController) {
                 return BlocBuilder<BulkAddCubit, BulkAddState>(
@@ -91,7 +91,7 @@ class MarketListBulkAddPage extends StatelessWidget {
                                             ),
                                           );
                                     },
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.close,
                                     ),
                                   )

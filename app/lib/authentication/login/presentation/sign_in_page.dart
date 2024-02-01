@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../route/route_list.dart';
 import '../domain/navigation_action.dart';
 import 'sign_in_bloc.dart';
 import '../domain/sign_in_status.dart';
 
 class SignInPage extends StatelessWidget {
-  SignInPage({required SignInBloc? bloc}) : _bloc = bloc ?? getIt.get();
+  SignInPage({
+    required SignInBloc? bloc,
+    super.key,
+  }) : _bloc = bloc ?? getIt.get();
 
   final _formKey = GlobalKey<FormState>();
   final _phoneNumberController = TextEditingController();
@@ -27,7 +31,7 @@ class SignInPage extends StatelessWidget {
               child: Center(
                 child: Container(
                   height: 200,
-                  margin: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(
                     vertical: 0,
                     horizontal: 16.0,
                   ),
@@ -65,9 +69,9 @@ class SignInPage extends StatelessWidget {
                                       );
                                 }
                               },
-                              child: state.status == SignInStatus.SIGNING
-                                  ? CircularProgressIndicator()
-                                  : Text('Continuar'),
+                              child: state.status == SignInStatus.signing
+                                  ? const CircularProgressIndicator()
+                                  : const Text('Continuar'),
                             )
                           ],
                         ),
@@ -83,9 +87,10 @@ class SignInPage extends StatelessWidget {
           if (state.navigationAction == null) {
             return;
           }
-          if (state.navigationAction?.action == NavigationActionType.PUSH_TO) {
-            context.push(
+          if (state.navigationAction?.action == NavigationActionType.pushTo) {
+            context.go(
               state.navigationAction!.value,
+              extra: _phoneNumberController.text
             );
           }
         },

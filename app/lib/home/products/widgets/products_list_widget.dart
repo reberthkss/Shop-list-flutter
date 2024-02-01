@@ -1,6 +1,5 @@
 import 'package:app/di/injection.dart';
 import 'package:app/home/products/list/bloc/products_bloc.dart';
-import 'package:app/route/route_list.dart';
 import 'package:app/widgets/product_card/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,9 +13,8 @@ class ProductsListWidget extends StatelessWidget {
     required this.selectedDepartmentId,
     required this.onTapProduct,
     super.key,
-  })  : _routeList = routeList ?? getIt.get(),
-        _bloc = bloc ?? getIt.get();
-  final RouteList _routeList;
+  }) : _bloc = bloc ?? getIt.get();
+  
   final ProductsBloc _bloc;
   final controller = TrackingScrollController();
   final String selectedDepartmentId;

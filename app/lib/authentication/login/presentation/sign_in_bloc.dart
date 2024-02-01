@@ -14,7 +14,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     this.interactor,
   ) : super(
           const SignInState(
-            status: SignInStatus.IDLE,
+            status: SignInStatus.idle,
           ),
         ) {
     on<DoSignIn>(doLogin);
@@ -27,7 +27,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     try {
       emit(
         state.copyWith(
-          status: SignInStatus.SIGNING,
+          status: SignInStatus.signing,
         ),
       );
       await interactor.signIn(
@@ -38,8 +38,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(
         state.copyWith(
           navigationAction: NavigationAction(
-            action: NavigationActionType.PUSH_TO,
-            value: routeList.authenticationList.goToSignInOtp(),
+            action: NavigationActionType.pushTo,
+            value: routeList.authenticationList.goToSignInOtp(
+              event.phoneNumber,
+            ),
           ),
         ),
       );
@@ -48,7 +50,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     } finally {
       emit(
         state.copyWith(
-          status: SignInStatus.IDLE,
+          navigationAction: null,
+          status: SignInStatus.idle,
         ),
       );
     }

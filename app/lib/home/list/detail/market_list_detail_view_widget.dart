@@ -53,7 +53,7 @@ class MarketListDetailViewWidget extends StatelessWidget {
         ),
         Row(
           children: [
-            Text(
+            const Text(
               "TOTAL: ",
             ),
             Expanded(

@@ -31,16 +31,14 @@ class BulkAddCubit extends Bloc<BulkAddEvent, BulkAddState> {
   }
 
   void onConfirm(Confirm event, Emitter<BulkAddState> emit) {
-    state.selectedProductList.forEach(
-      (product) {
-        interactor.saveProduct(
-          AddProductToMarketList(
-            productId: product.id,
-            marketListId: event.marketListId,
-          ),
-        );
-      },
-    );
+    for (var product in state.selectedProductList) {
+      interactor.saveProduct(
+        AddProductToMarketList(
+          productId: product.id,
+          marketListId: event.marketListId,
+        ),
+      );
+    }
   }
 
   void onRemoveProduct(Remove event, Emitter<BulkAddState> emit) {

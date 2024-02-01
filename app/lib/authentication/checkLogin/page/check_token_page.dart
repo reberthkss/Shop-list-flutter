@@ -6,13 +6,18 @@ import '../bloc/check_login_bloc.dart';
 import '../widgets/check_token_widget.dart';
 
 class CheckTokenPage extends StatelessWidget {
-  const CheckTokenPage({super.key});
+  const CheckTokenPage({required this.username, super.key});
+
+  final String username;
 
   @override
   Widget build(BuildContext context) {
+    print(username);
     return BlocProvider(
       create: (BuildContext context) => getIt.get<CheckLoginBloc>(),
-      child: CheckTokenWidget(),
+      child: CheckTokenWidget(
+        username: username,
+      ),
     );
   }
 }

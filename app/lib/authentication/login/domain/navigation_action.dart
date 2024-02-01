@@ -9,6 +9,6 @@ class NavigationAction {
 }
 
 enum NavigationActionType {
-  POP_TO,
-  PUSH_TO,
+  popTo,
+  pushTo,
 }

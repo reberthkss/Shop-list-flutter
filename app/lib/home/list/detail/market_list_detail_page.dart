@@ -29,7 +29,7 @@ class MarketListDetailPage extends StatelessWidget {
         ),
       child: BlocConsumer<MarketListDetailCubit, MarketListDetailState>(
         listener: (context, state) {
-          if (state.status == MarketListDetailStatus.REMOVING_SUCCESS) {
+          if (state.status == MarketListDetailStatus.removingSuccess) {
             Fluttertoast.showToast(
               msg: "Os produtos foram removidos da lista!",
             );
@@ -40,7 +40,7 @@ class MarketListDetailPage extends StatelessWidget {
                 );
           }
 
-          if (state.status == MarketListDetailStatus.REMOVING_ERROR) {
+          if (state.status == MarketListDetailStatus.removingError) {
             Fluttertoast.showToast(
               msg:
                   "Houve um erro durante a remoção dos produtos! Tente novamente",
@@ -49,16 +49,16 @@ class MarketListDetailPage extends StatelessWidget {
         },
         builder: (context, state) {
           switch (state.status) {
-            case MarketListDetailStatus.LOADING:
-            case MarketListDetailStatus.REMOVING:
+            case MarketListDetailStatus.loading:
+            case MarketListDetailStatus.removing:
               {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
-            case MarketListDetailStatus.RESULT:
-            case MarketListDetailStatus.REMOVING_SUCCESS:
-            case MarketListDetailStatus.REMOVING_ERROR:
+            case MarketListDetailStatus.result:
+            case MarketListDetailStatus.removingSuccess:
+            case MarketListDetailStatus.removingError:
               {
                 if (state.model == null) {
                   return const SizedBox.shrink();

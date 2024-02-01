@@ -9,13 +9,16 @@ import '../../../route/route_list.dart';
 
 class CheckTokenWidget extends StatelessWidget {
   CheckTokenWidget({
+    required this.username,
     RouteList? routeList,
     super.key,
   }) : _routeList = routeList ?? getIt.get();
 
+  final String username;
+
   final _formKey = GlobalKey<FormState>();
   final _controller = TextEditingController.fromValue(
-    TextEditingValue(),
+    const TextEditingValue(),
   );
   final RouteList _routeList;
 
@@ -23,22 +26,20 @@ class CheckTokenWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<CheckLoginBloc, CheckLoginState>(
       listener: (ctx, state) {
-        if (state.status == CheckLoginStatus.VALIDATION_SUCCESS) {
-          context.go(
-            _routeList.productDetail.base
-          );
+        if (state.status == CheckLoginStatus.validationSuccess) {
+          context.go(_routeList.productDetail.base);
         }
       },
       builder: (context, state) {
         return Scaffold(
-          body: Container(
+          body: SizedBox(
             height: double.infinity,
             width: double.infinity,
             child: Center(
               child: Container(
                 height: 200,
                 width: double.infinity,
-                margin: EdgeInsets.symmetric(
+                margin: const EdgeInsets.symmetric(
                   vertical: 0.0,
                   horizontal: 16.0,
                 ),
@@ -60,7 +61,7 @@ class CheckTokenWidget extends StatelessWidget {
 
                               return null;
                             },
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: "Digite Código recebido via SMS",
                             ),
                           ),
@@ -70,15 +71,16 @@ class CheckTokenWidget extends StatelessWidget {
                                   false) {
                                 context.read<CheckLoginBloc>().add(
                                       ValidateOTP(
+                                        username: username,
                                         otp: _controller.text,
                                       ),
                                     );
                               }
                             },
                             child:
-                                state.status == CheckLoginStatus.VALIDATING_OTP
-                                    ? CircularProgressIndicator()
-                                    : Text(
+                                state.status == CheckLoginStatus.validatingOTP
+                                    ? const CircularProgressIndicator()
+                                    : const Text(
                                         "Confirmar",
                                       ),
                           )

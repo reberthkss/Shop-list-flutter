@@ -19,7 +19,7 @@ class DepartmentDropdownWidget extends StatelessWidget {
         switch (state.runtimeType) {
           case LoadingDepartments:
             {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             }
           case Departments:
             {
@@ -31,7 +31,7 @@ class DepartmentDropdownWidget extends StatelessWidget {
             }
           default:
             {
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             }
         }
       },

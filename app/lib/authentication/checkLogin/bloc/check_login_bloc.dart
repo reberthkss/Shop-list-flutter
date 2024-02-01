@@ -1,45 +1,53 @@
+import 'package:app/authentication/checkLogin/domain/check_token_request.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../domain/check_token_interactor.dart';
 import 'check_login_status.dart';
 
 @injectable
 class CheckLoginBloc extends Bloc<CheckLoginEvent, CheckLoginState> {
-  CheckLoginBloc()
-      : super(
-          CheckLoginState(
-            status: CheckLoginStatus.Idle,
+  CheckLoginBloc(
+    this.interactor,
+  ) : super(
+          const CheckLoginState(
+            status: CheckLoginStatus.idle,
           ),
         ) {
     on<ValidateOTP>(validateOtp);
   }
 
+  final CheckTokenInteractor interactor;
+
   void validateOtp(ValidateOTP event, Emitter<CheckLoginState> emit) async {
     try {
       emit(
         state.copyWith(
-          status: CheckLoginStatus.VALIDATING_OTP,
+          status: CheckLoginStatus.validatingOTP,
         ),
       );
 
-      await Future.delayed(
-        Duration(
-          seconds: 2,
-        ),
-      );
-
-      emit(
-        state.copyWith(
-          status: CheckLoginStatus.VALIDATION_SUCCESS,
-        ),
-      );
+      await interactor.checkToken(CheckTokenRequest(
+        otp: event.otp,
+        username: event.username,
+      ));
 
       emit(
         state.copyWith(
-          status: CheckLoginStatus.Idle,
+          status: CheckLoginStatus.validationSuccess,
         ),
       );
-    } catch (exception) {}
+    } catch (exception) {
+      print(
+        exception,
+      );
+    } finally {
+      emit(
+        state.copyWith(
+          status: CheckLoginStatus.idle,
+        ),
+      );
+    }
   }
 }
 
@@ -62,7 +70,9 @@ abstract class CheckLoginEvent {}
 class ValidateOTP extends CheckLoginEvent {
   ValidateOTP({
     required this.otp,
+    required this.username,
   });
 
   final String otp;
+  final String username;
 }

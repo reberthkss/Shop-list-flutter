@@ -1,5 +1,4 @@
 import 'package:app/home/list/widget/market_list_view/market_list_view_widget.dart';
-import 'package:app/route/route_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -12,10 +11,8 @@ class MarketListHome extends StatelessWidget {
     routeList,
     createBloc,
     super.key,
-  })  : _routeList = routeList ?? getIt.get(),
-        _createBloc = createBloc ?? getIt.get();
+  }) : _createBloc = createBloc ?? getIt.get();
 
-  final RouteList _routeList;
   final MarketListHomeCreateBloc _createBloc;
   final TextEditingController controller = TextEditingController();
 

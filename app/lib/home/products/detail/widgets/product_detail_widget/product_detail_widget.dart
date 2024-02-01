@@ -1,4 +1,3 @@
-import 'package:app/di/injection.dart';
 import 'package:app/widgets/button/button_extended.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -8,14 +7,13 @@ import '../../../../../route/route_list.dart';
 import '../../data/product_detail_model.dart';
 
 class ProductDetailWidget extends StatelessWidget {
-  ProductDetailWidget({
+  const ProductDetailWidget({
     required this.productDetail,
     RouteList? routeList,
     super.key,
-  }) : _routeList = routeList ?? getIt.get<RouteList>();
+  });
 
   final ProductDetail productDetail;
-  final RouteList _routeList;
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +52,8 @@ class ProductDetailWidget extends StatelessWidget {
                 Center(
                   child: HighCharts(
                     loader: const SizedBox(
-                      child: LinearProgressIndicator(),
                       width: 200,
+                      child: LinearProgressIndicator(),
                     ),
                     size: const Size(double.infinity, 400),
                     data: chartData,

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../base/model/product_model.dart';
 
-enum ProductHorizontalCardStyle { NORMAL, REMOVED, CHECKING }
+enum ProductHorizontalCardStyle { normal, removed, checking }
 
 class ProductHorizontalCard extends StatelessWidget {
   const ProductHorizontalCard({
     required this.product,
-    this.style = ProductHorizontalCardStyle.NORMAL,
+    this.style = ProductHorizontalCardStyle.normal,
     super.key,
   });
 
@@ -22,7 +22,7 @@ class ProductHorizontalCard extends StatelessWidget {
     Color priceTextColor;
     Color productNameColor;
     switch (style) {
-      case ProductHorizontalCardStyle.NORMAL:
+      case ProductHorizontalCardStyle.normal:
         {
           opacity = 1;
           priceTextDecoration = productNameTextDecoration = TextDecoration.none;
@@ -30,7 +30,7 @@ class ProductHorizontalCard extends StatelessWidget {
 
           break;
         }
-      case ProductHorizontalCardStyle.REMOVED:
+      case ProductHorizontalCardStyle.removed:
         {
           opacity = 0.5;
           priceTextDecoration =
@@ -38,7 +38,7 @@ class ProductHorizontalCard extends StatelessWidget {
           productNameColor = priceTextColor = Colors.red;
           break;
         }
-      case ProductHorizontalCardStyle.CHECKING:
+      case ProductHorizontalCardStyle.checking:
         {
           opacity = 0.8;
           priceTextDecoration =

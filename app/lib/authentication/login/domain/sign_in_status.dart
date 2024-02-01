@@ -1,3 +1,4 @@
 enum SignInStatus {
-  IDLE, SIGNING
+  idle,
+  signing,
 }

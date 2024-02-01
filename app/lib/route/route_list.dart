@@ -22,9 +22,16 @@ class AuthenticationRouteList {
   final String loginOtp = "login/otp";
   final String register = "register";
   final String registerOtp = "register/otp";
-  final String checkToken = "checkToken";
 
-  String goToSignInOtp() => "/login/$loginOtp";
+  String goToSignInOtp(String username) => "/login/$loginOtp";
+}
+
+class GoToSignInExtra {
+  const GoToSignInExtra({
+    required this.username,
+  });
+
+  final String username;
 }
 
 @singleton

@@ -9,7 +9,7 @@ import '../../base/model/product_model.dart';
 import 'market_list_detail_check_list_widget.dart';
 import 'market_list_detail_edit_widget.dart';
 
-enum WidgetState { NORMAL, EDITING, CHECKING }
+enum WidgetState { normal, editing, checking }
 
 class MarketListDetailResultWidget extends StatefulWidget {
   MarketListDetailResultWidget({
@@ -39,7 +39,7 @@ class MarketListDetailResultWidget extends StatefulWidget {
 }
 
 class MarketListDetailResultState extends State<MarketListDetailResultWidget> {
-  WidgetState state = WidgetState.NORMAL;
+  WidgetState state = WidgetState.normal;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class MarketListDetailResultState extends State<MarketListDetailResultWidget> {
             onNormal: IconButton(
               onPressed: () {
                 setState(() {
-                  state = WidgetState.EDITING;
+                  state = WidgetState.editing;
                 });
               },
               icon: const Icon(
@@ -63,14 +63,14 @@ class MarketListDetailResultState extends State<MarketListDetailResultWidget> {
               onPressed: () {
                 widget.onConfirm();
                 setState(() {
-                  state = WidgetState.NORMAL;
+                  state = WidgetState.normal;
                 });
               },
               icon: const Icon(
                 Icons.close,
               ),
             ),
-            onChecking: SizedBox.shrink(),
+            onChecking: const SizedBox.shrink(),
           ),
           Renderer(
             state: state,
@@ -78,22 +78,24 @@ class MarketListDetailResultState extends State<MarketListDetailResultWidget> {
               onPressed: () {
                 setState(
                   () {
-                    state = WidgetState.CHECKING;
+                    state = WidgetState.checking;
                   },
                 );
               },
-              icon: Icon(Icons.check_box_sharp),
+              icon: const Icon(Icons.check_box_sharp,),
             ),
-            onEditing: SizedBox.shrink(),
+            onEditing: const SizedBox.shrink(),
             onChecking: IconButton(
               onPressed: () {
                 setState(
                   () {
-                    state = WidgetState.NORMAL;
+                    state = WidgetState.normal;
                   },
                 );
               },
-              icon: Icon(Icons.check_box_sharp),
+              icon: const Icon(
+                Icons.check_box_sharp,
+              ),
             ),
           )
         ],
@@ -109,8 +111,8 @@ class MarketListDetailResultState extends State<MarketListDetailResultWidget> {
             "Adicionar produto",
           ),
         ),
-        onEditing: SizedBox.shrink(),
-        onChecking: SizedBox.shrink(),
+        onEditing: const SizedBox.shrink(),
+        onChecking: const SizedBox.shrink(),
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
@@ -138,11 +140,13 @@ class MarketListDetailResultState extends State<MarketListDetailResultWidget> {
 }
 
 class Renderer extends StatelessWidget {
-  const Renderer(
-      {required this.state,
-      required this.onNormal,
-      required this.onEditing,
-      required this.onChecking});
+  const Renderer({
+    required this.state,
+    required this.onNormal,
+    required this.onEditing,
+    required this.onChecking,
+    super.key,
+  });
   final WidgetState state;
   final Widget onNormal;
   final Widget onEditing;
@@ -150,21 +154,21 @@ class Renderer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (state) {
-      case WidgetState.NORMAL:
+      case WidgetState.normal:
         {
           return onNormal;
         }
-      case WidgetState.EDITING:
+      case WidgetState.editing:
         {
           return onEditing;
         }
-      case WidgetState.CHECKING:
+      case WidgetState.checking:
         {
           return onChecking;
         }
       default:
         {
-          return SizedBox.shrink();
+          return const SizedBox.shrink();
         }
     }
   }

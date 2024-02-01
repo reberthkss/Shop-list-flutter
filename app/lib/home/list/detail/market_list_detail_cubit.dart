@@ -13,7 +13,7 @@ class MarketListDetailCubit
     this.interactor,
   ) : super(
           const MarketListDetailState(
-            status: MarketListDetailStatus.IDLE,
+            status: MarketListDetailStatus.idle,
             model: null,
           ),
         ) {
@@ -31,14 +31,14 @@ class MarketListDetailCubit
 
     emit(
       state.copyWith(
-        status: MarketListDetailStatus.LOADING,
+        status: MarketListDetailStatus.loading,
       ),
     );
     try {
       final marketDetail = await interactor.getMarketListDetail(marketListId);
       emit(
         state.copyWith(
-          status: MarketListDetailStatus.RESULT,
+          status: MarketListDetailStatus.result,
           model: marketDetail,
         ),
       );
@@ -84,17 +84,17 @@ class MarketListDetailCubit
     Emitter<MarketListDetailState> emit,
   ) async {
     try {
-      emit(state.copyWith(status: MarketListDetailStatus.REMOVING));
+      emit(state.copyWith(status: MarketListDetailStatus.removing));
 
       await interactor.removeProducts(
         state.removedProducts,
         event.marketListId,
       );
 
-      emit(state.copyWith(status: MarketListDetailStatus.REMOVING_SUCCESS));
+      emit(state.copyWith(status: MarketListDetailStatus.removingSuccess));
     } catch (exception) {
       print(exception);
-      emit(state.copyWith(status: MarketListDetailStatus.REMOVING_ERROR));
+      emit(state.copyWith(status: MarketListDetailStatus.removingError));
     }
   }
 
@@ -198,11 +198,11 @@ class MarketListDetailState extends Equatable {
 }
 
 enum MarketListDetailStatus {
-  LOADING,
-  RESULT,
-  IDLE,
-  ERROR,
-  REMOVING,
-  REMOVING_SUCCESS,
-  REMOVING_ERROR
+  loading,
+  result,
+  idle,
+  error,
+  removing,
+  removingSuccess,
+  removingError,
 }

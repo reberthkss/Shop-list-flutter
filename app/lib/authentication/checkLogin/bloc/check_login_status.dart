@@ -1,6 +1,6 @@
 enum CheckLoginStatus {
-  Idle,
-  VALIDATING_OTP,
-  VALIDATION_SUCCESS,
-  Check_error  
+  idle,
+  validatingOTP,
+  validationSuccess,
+  checkError  
 }
