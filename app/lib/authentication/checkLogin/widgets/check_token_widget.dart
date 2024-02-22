@@ -10,24 +10,29 @@ import '../../../route/route_list.dart';
 class CheckTokenWidget extends StatelessWidget {
   CheckTokenWidget({
     required this.username,
+    required this.url,
+    required this.onSuccess,
+    required this.onFail,
     RouteList? routeList,
     super.key,
-  }) : _routeList = routeList ?? getIt.get();
+  });
 
   final String username;
+  final String url;
+  final Function(String accessToken) onSuccess;
+  final Function() onFail;
 
   final _formKey = GlobalKey<FormState>();
   final _controller = TextEditingController.fromValue(
     const TextEditingValue(),
   );
-  final RouteList _routeList;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CheckLoginBloc, CheckLoginState>(
       listener: (ctx, state) {
         if (state.status == CheckLoginStatus.validationSuccess) {
-          context.go(_routeList.productDetail.base);
+          onSuccess(state.accessToken ?? '');
         }
       },
       builder: (context, state) {
@@ -73,6 +78,7 @@ class CheckTokenWidget extends StatelessWidget {
                                       ValidateOTP(
                                         username: username,
                                         otp: _controller.text,
+                                        url: url
                                       ),
                                     );
                               }

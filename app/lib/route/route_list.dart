@@ -20,10 +20,12 @@ class RouteList {
 class AuthenticationRouteList {
   final String login = "/login";
   final String loginOtp = "login/otp";
-  final String register = "register";
+  final String register = "/register";
   final String registerOtp = "register/otp";
+  final String redirect = "/redirect";
 
   String goToSignInOtp(String username) => "/login/$loginOtp";
+  String goToRegisterOtp() => "/register/$registerOtp";
 }
 
 class GoToSignInExtra {

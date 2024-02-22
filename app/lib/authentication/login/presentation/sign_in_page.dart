@@ -10,13 +10,16 @@ import '../domain/sign_in_status.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({
-    required SignInBloc? bloc,
+    SignInBloc? bloc,
+    RouteList? routeList,
     super.key,
-  }) : _bloc = bloc ?? getIt.get();
+  })  : _bloc = bloc ?? getIt.get(),
+        _routeList = routeList ?? getIt.get();
 
   final _formKey = GlobalKey<FormState>();
   final _phoneNumberController = TextEditingController();
   final SignInBloc _bloc;
+  final RouteList _routeList;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +74,18 @@ class SignInPage extends StatelessWidget {
                               },
                               child: state.status == SignInStatus.signing
                                   ? const CircularProgressIndicator()
-                                  : const Text('Continuar'),
+                                  : const Text(
+                                      'Continuar',
+                                    ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                context.push(
+                                    _routeList.authenticationList.register);
+                              },
+                              child: Text(
+                                "Não possuo uma conta",
+                              ),
                             )
                           ],
                         ),
@@ -88,10 +102,8 @@ class SignInPage extends StatelessWidget {
             return;
           }
           if (state.navigationAction?.action == NavigationActionType.pushTo) {
-            context.go(
-              state.navigationAction!.value,
-              extra: _phoneNumberController.text
-            );
+            context.go(state.navigationAction!.value,
+                extra: _phoneNumberController.text);
           }
         },
       ),

@@ -4,7 +4,7 @@ import '../data/check_token_repository.dart';
 import 'check_token_request.dart';
 
 abstract class CheckTokenInteractor {
-  Future<void> checkToken(
+  Future<String> checkToken(
     CheckTokenRequest request
   );
 }
@@ -18,7 +18,7 @@ class CheckTokenInteractorImpl extends CheckTokenInteractor {
   final CheckTokenRepository repository;
 
   @override
-  Future<void> checkToken(CheckTokenRequest request) {
+  Future<String> checkToken(CheckTokenRequest request) {
     return repository.checkToken(request);
   }
 
