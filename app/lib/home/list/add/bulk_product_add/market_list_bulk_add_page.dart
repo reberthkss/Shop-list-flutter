@@ -1,5 +1,5 @@
-import 'package:app/home/list/add/bulk_product_add/bulk_add_cubit.dart';
-import 'package:app/widgets/button/button_extended.dart';
+import 'package:shop_list/home/list/add/bulk_product_add/bulk_add_cubit.dart';
+import 'package:shop_list/widgets/button/button_extended.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

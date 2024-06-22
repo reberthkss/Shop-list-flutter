@@ -1,4 +1,4 @@
-import 'package:app/route/router.dart';
+import 'package:shop_list/route/router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

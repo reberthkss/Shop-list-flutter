@@ -1,6 +1,6 @@
-import 'package:app/home/department/department_dropdown/department_dropdown_widget.dart';
-import 'package:app/home/products/list/bloc/products_by_department_bloc.dart';
-import 'package:app/home/products/widgets/products_list_widget.dart';
+import 'package:shop_list/home/department/department_dropdown/department_dropdown_widget.dart';
+import 'package:shop_list/home/products/list/bloc/products_by_department_bloc.dart';
+import 'package:shop_list/home/products/widgets/products_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

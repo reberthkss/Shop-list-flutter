@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:app/home/products/detail/data/product_detail_model.dart';
+import 'package:shop_list/home/products/detail/data/product_detail_model.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

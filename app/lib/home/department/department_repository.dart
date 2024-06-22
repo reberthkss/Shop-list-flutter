@@ -1,4 +1,4 @@
-import 'package:app/home/base/model/department_model.dart';
+import 'package:shop_list/home/base/model/department_model.dart';
 import 'package:injectable/injectable.dart';
 
 import 'department_service.dart';

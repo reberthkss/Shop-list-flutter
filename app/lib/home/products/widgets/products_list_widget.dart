@@ -1,6 +1,6 @@
-import 'package:app/di/injection.dart';
-import 'package:app/home/products/list/bloc/products_bloc.dart';
-import 'package:app/widgets/product_card/product_card.dart';
+import 'package:shop_list/di/injection.dart';
+import 'package:shop_list/home/products/list/bloc/products_bloc.dart';
+import 'package:shop_list/widgets/product_card/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

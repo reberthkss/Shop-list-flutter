@@ -1,5 +1,5 @@
-import 'package:app/home/base/model/price_model.dart';
-import 'package:app/home/base/model/product_model.dart';
+import 'package:shop_list/home/base/model/price_model.dart';
+import 'package:shop_list/home/base/model/product_model.dart';
 import 'package:equatable/equatable.dart';
 
 class ProductDetail extends Equatable {

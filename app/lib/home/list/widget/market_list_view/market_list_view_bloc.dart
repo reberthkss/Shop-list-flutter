@@ -1,4 +1,4 @@
-import 'package:app/home/list/widget/market_list_view/market_list_view_interactor.dart';
+import 'package:shop_list/home/list/widget/market_list_view/market_list_view_interactor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';

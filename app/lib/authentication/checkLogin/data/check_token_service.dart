@@ -11,7 +11,10 @@ abstract class CheckTokenService {
 
 @Injectable(as: CheckTokenService)
 class CheckTokenServiceImpl extends CheckTokenService {
-  CheckTokenServiceImpl(this.dio);
+  CheckTokenServiceImpl(
+    @Named("NoAuthDio")
+    this.dio
+    );
 
   final Dio dio;
 

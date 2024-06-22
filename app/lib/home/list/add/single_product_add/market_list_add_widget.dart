@@ -1,4 +1,4 @@
-import 'package:app/home/base/model/product_model.dart';
+import 'package:shop_list/home/base/model/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

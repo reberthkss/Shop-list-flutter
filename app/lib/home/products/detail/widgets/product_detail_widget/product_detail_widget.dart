@@ -1,4 +1,4 @@
-import 'package:app/widgets/button/button_extended.dart';
+import 'package:shop_list/widgets/button/button_extended.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:high_chart/high_chart.dart';

@@ -1,6 +1,6 @@
-import 'package:app/authentication/login/domain/model/sign_in_request.dart';
-import 'package:app/authentication/login/domain/sign_in_interactor.dart';
-import 'package:app/authentication/login/domain/sign_in_status.dart';
+import 'package:shop_list/authentication/login/domain/model/sign_in_request.dart';
+import 'package:shop_list/authentication/login/domain/sign_in_interactor.dart';
+import 'package:shop_list/authentication/login/domain/sign_in_status.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 

@@ -85,16 +85,16 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    final noAuthNetworkModule = _$NoAuthNetworkModule();
     final networkModule = _$NetworkModule();
+    final noAuthNetworkModule = _$NoAuthNetworkModule();
     gh.singleton<_i3.AuthenticationRouteList>(_i3.AuthenticationRouteList());
     gh.factory<_i4.DashboardBloc>(() => _i4.DashboardBloc());
     gh.factory<_i5.DepartmentSelectorBloc>(() => _i5.DepartmentSelectorBloc());
+    gh.factory<_i6.Dio>(() => networkModule.dio);
     gh.factory<_i6.Dio>(
       () => noAuthNetworkModule.dio,
       instanceName: 'NoAuthDio',
     );
-    gh.factory<_i6.Dio>(() => networkModule.dio);
     gh.singleton<_i3.HomeRouteList>(_i3.HomeRouteList());
     gh.singleton<_i3.ListRoute>(_i3.ListRoute());
     gh.factory<_i7.MarketListAddService>(
@@ -127,8 +127,8 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i17.TokenPreferencesImpl(gh<_i15.ShopListSharedPreferences>()));
     gh.singleton<_i18.AccessTokenInterceptor>(
         _i18.AccessTokenInterceptor(gh<_i17.TokenPreferences>()));
-    gh.factory<_i19.CheckTokenService>(
-        () => _i19.CheckTokenServiceImpl(gh<_i6.Dio>()));
+    gh.factory<_i19.CheckTokenService>(() =>
+        _i19.CheckTokenServiceImpl(gh<_i6.Dio>(instanceName: 'NoAuthDio')));
     gh.factory<_i20.DepartmentService>(
         () => _i20.DepartmentServiceImpl(gh<_i6.Dio>()));
     gh.factory<_i21.MarketListAddRepository>(

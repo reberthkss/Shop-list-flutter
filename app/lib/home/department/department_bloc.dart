@@ -1,4 +1,4 @@
-import 'package:app/home/department/department_interactor.dart';
+import 'package:shop_list/home/department/department_interactor.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';

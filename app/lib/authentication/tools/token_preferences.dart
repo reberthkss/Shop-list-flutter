@@ -1,4 +1,4 @@
-import 'package:app/tools/shared_preferences/shared_preferences.dart';
+import 'package:shop_list/tools/shared_preferences/shared_preferences.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class TokenPreferences {
@@ -25,7 +25,7 @@ class TokenPreferencesImpl extends TokenPreferences {
 
   @override
   Future<void> saveAccessToken(String accessToken) async {
-    sharedPreferences.save(accessTokenKey, accessToken);
+   return sharedPreferences.save(accessTokenKey, accessToken);
   }
 
 }

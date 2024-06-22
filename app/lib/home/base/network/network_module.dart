@@ -1,6 +1,6 @@
-import 'package:app/di/injection.dart';
-import 'package:app/tools/interceptors/access_token_interceptor.dart';
-import 'package:app/tools/interceptors/refresh_token_interceptor.dart';
+import 'package:shop_list/di/injection.dart';
+import 'package:shop_list/tools/interceptors/access_token_interceptor.dart';
+import 'package:shop_list/tools/interceptors/refresh_token_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
@@ -24,4 +24,4 @@ abstract class NetworkModule {
 }
 
 
-const String baseUrl = "http://192.168.0.9:3000";
+const String baseUrl = "http://shoplist-api.dialogy.studio";

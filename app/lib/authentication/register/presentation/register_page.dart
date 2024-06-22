@@ -1,5 +1,5 @@
-import 'package:app/authentication/register/presentation/register_bloc.dart';
-import 'package:app/authentication/register/presentation/register_status.dart';
+import 'package:shop_list/authentication/register/presentation/register_bloc.dart';
+import 'package:shop_list/authentication/register/presentation/register_status.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

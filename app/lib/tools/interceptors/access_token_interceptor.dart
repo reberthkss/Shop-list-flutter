@@ -1,5 +1,5 @@
-import 'package:app/authentication/tools/token_preferences.dart';
-import 'package:app/tools/shared_preferences/shared_preferences.dart';
+import 'package:shop_list/authentication/tools/token_preferences.dart';
+import 'package:shop_list/tools/shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

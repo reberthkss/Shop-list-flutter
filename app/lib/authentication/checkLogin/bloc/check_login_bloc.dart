@@ -1,4 +1,4 @@
-import 'package:app/authentication/checkLogin/domain/check_token_request.dart';
+import 'package:shop_list/authentication/checkLogin/domain/check_token_request.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 

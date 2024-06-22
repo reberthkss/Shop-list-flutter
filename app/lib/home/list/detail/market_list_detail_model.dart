@@ -1,6 +1,6 @@
-import 'package:app/home/base/model/market_list_model.dart';
-import 'package:app/home/base/model/price_model.dart';
-import 'package:app/home/base/model/product_occurrences_model.dart';
+import 'package:shop_list/home/base/model/market_list_model.dart';
+import 'package:shop_list/home/base/model/price_model.dart';
+import 'package:shop_list/home/base/model/product_occurrences_model.dart';
 
 class MarketListDetailModel extends MarketListModel {
   const MarketListDetailModel({

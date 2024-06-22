@@ -1,4 +1,4 @@
-import 'package:app/authentication/register/presentation/register_status.dart';
+import 'package:shop_list/authentication/register/presentation/register_status.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 

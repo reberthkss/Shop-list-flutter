@@ -1,4 +1,4 @@
-import 'package:app/home/products/list/products_interactor.dart';
+import 'package:shop_list/home/products/list/products_interactor.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 

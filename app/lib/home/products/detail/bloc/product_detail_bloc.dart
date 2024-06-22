@@ -1,5 +1,5 @@
-import 'package:app/home/products/detail/bloc/product_detail_state.dart';
-import 'package:app/home/products/detail/domain/product_detail_interactor.dart';
+import 'package:shop_list/home/products/detail/bloc/product_detail_state.dart';
+import 'package:shop_list/home/products/detail/domain/product_detail_interactor.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 

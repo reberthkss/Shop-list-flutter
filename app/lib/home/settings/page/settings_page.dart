@@ -1,5 +1,5 @@
-import 'package:app/home/settings/bloc/settings_bloc.dart';
-import 'package:app/home/settings/widgets/settings_widget.dart';
+import 'package:shop_list/home/settings/bloc/settings_bloc.dart';
+import 'package:shop_list/home/settings/widgets/settings_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

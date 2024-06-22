@@ -1,5 +1,5 @@
-import 'package:app/home/base/model/product_model.dart';
-import 'package:app/home/products/list/products_repository.dart';
+import 'package:shop_list/home/base/model/product_model.dart';
+import 'package:shop_list/home/products/list/products_repository.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class ProductsInteractor {

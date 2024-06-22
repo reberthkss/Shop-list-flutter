@@ -1,4 +1,4 @@
-import 'package:app/authentication/redirect/redirect_bloc.dart';
+import 'package:shop_list/authentication/redirect/redirect_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

@@ -1,5 +1,5 @@
-import 'package:app/authentication/register/domain/register_payload.dart';
-import 'package:app/authentication/widgets/register_widget/register_param.dart';
+import 'package:shop_list/authentication/register/domain/register_payload.dart';
+import 'package:shop_list/authentication/widgets/register_widget/register_param.dart';
 import 'package:flutter/material.dart';
 
 class RegisterWidget extends StatelessWidget {

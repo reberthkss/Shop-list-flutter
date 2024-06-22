@@ -19,4 +19,4 @@ abstract class NoAuthNetworkModule {
         );
 }
 
-const String baseUrl = "http://192.168.0.9:3000";
+const String baseUrl = "http://shoplist-api.dialogy.studio";

@@ -1,5 +1,5 @@
-import 'package:app/authentication/checkLogin/bloc/check_login_bloc.dart';
-import 'package:app/authentication/checkLogin/bloc/check_login_status.dart';
+import 'package:shop_list/authentication/checkLogin/bloc/check_login_bloc.dart';
+import 'package:shop_list/authentication/checkLogin/bloc/check_login_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

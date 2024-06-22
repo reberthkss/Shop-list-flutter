@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:app/authentication/tools/token_preferences.dart';
-import 'package:app/main.dart';
-import 'package:app/route/route_list.dart';
+import 'package:shop_list/authentication/tools/token_preferences.dart';
+import 'package:shop_list/main.dart';
+import 'package:shop_list/route/route_list.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

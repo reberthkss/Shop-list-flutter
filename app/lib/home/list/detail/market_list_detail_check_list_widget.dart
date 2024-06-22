@@ -1,5 +1,5 @@
-import 'package:app/home/base/model/product_occurrences_model.dart';
-import 'package:app/home/products/widgets/product_horizontal_card_widget.dart';
+import 'package:shop_list/home/base/model/product_occurrences_model.dart';
+import 'package:shop_list/home/products/widgets/product_horizontal_card_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../base/model/product_model.dart';

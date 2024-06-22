@@ -1,4 +1,4 @@
-import 'package:app/authentication/register/domain/register_payload.dart';
+import 'package:shop_list/authentication/register/domain/register_payload.dart';
 import 'package:injectable/injectable.dart';
 
 import '../data/register_repository.dart';

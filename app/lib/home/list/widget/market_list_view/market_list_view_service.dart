@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:app/home/base/model/market_list_model.dart';
+import 'package:shop_list/home/base/model/market_list_model.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

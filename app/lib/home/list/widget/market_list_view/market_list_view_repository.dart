@@ -1,4 +1,4 @@
-import 'package:app/home/base/model/market_list_model.dart';
+import 'package:shop_list/home/base/model/market_list_model.dart';
 import 'package:injectable/injectable.dart';
 
 import 'market_list_view_service.dart';

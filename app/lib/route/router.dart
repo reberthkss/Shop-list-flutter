@@ -1,11 +1,11 @@
-import 'package:app/authentication/login/presentation/sign_in_page.dart';
-import 'package:app/authentication/register/presentation/register_page.dart';
-import 'package:app/authentication/tools/token_preferences.dart';
-import 'package:app/home/list/add/bulk_product_add/market_list_bulk_add_page.dart';
-import 'package:app/home/list/create/market_list_create_page.dart';
-import 'package:app/home/list/home/market_list_home.dart';
-import 'package:app/home/products/detail/page/product_detail_page.dart';
-import 'package:app/route/route_list.dart';
+import 'package:shop_list/authentication/login/presentation/sign_in_page.dart';
+import 'package:shop_list/authentication/register/presentation/register_page.dart';
+import 'package:shop_list/authentication/tools/token_preferences.dart';
+import 'package:shop_list/home/list/add/bulk_product_add/market_list_bulk_add_page.dart';
+import 'package:shop_list/home/list/create/market_list_create_page.dart';
+import 'package:shop_list/home/list/home/market_list_home.dart';
+import 'package:shop_list/home/products/detail/page/product_detail_page.dart';
+import 'package:shop_list/route/route_list.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

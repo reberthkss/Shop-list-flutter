@@ -1,5 +1,5 @@
-import 'package:app/home/list/detail/market_list_detail_model.dart';
-import 'package:app/home/list/detail/market_list_detail_view_widget.dart';
+import 'package:shop_list/home/list/detail/market_list_detail_model.dart';
+import 'package:shop_list/home/list/detail/market_list_detail_view_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

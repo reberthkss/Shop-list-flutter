@@ -1,4 +1,4 @@
-import 'package:app/authentication/tools/token_preferences.dart';
+import 'package:shop_list/authentication/tools/token_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 

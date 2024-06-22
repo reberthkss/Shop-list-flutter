@@ -1,5 +1,5 @@
-import 'package:app/authentication/register/data/register_service.dart';
-import 'package:app/authentication/register/domain/register_payload.dart';
+import 'package:shop_list/authentication/register/data/register_service.dart';
+import 'package:shop_list/authentication/register/domain/register_payload.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class RegisterRepository {
